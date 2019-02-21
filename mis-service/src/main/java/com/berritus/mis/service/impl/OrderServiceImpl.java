@@ -5,6 +5,8 @@ import com.berritus.mis.bean.mybatis.MisProdDef;
 import com.berritus.mis.dao.MisOrderMapper;
 import com.berritus.mis.dao.MisProdDefMapper;
 import com.berritus.mis.dubbo.api.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+    private Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
     private static AtomicInteger atomicInteger = new AtomicInteger(100);
 
@@ -44,11 +47,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public long insertMisOrder(MisOrder record) {
-        MisProdDef prodDef = null;
-        synchronized(this){
-            prodDef = misProdDefMapper.selectByPrimaryKey(record.getProdId());
+        for(int i = 0; i <5; i++){
+            MisProdDef prodDef = misProdDefMapper.selectByPrimaryKey(record.getProdId());
             if(prodDef.getInStock() == 0){
                 return 0;
+            }
+
+            MisProdDef bean = new MisProdDef();
+            bean.setProdId(record.getProdId());
+            bean.setInStock(prodDef.getInStock() - 1);
+            bean.setVersion(prodDef.getVersion());
+            int ret = updateMisProdDef(bean);
+            if(ret == 0){
+                logger.warn(Thread.currentThread().getName() + "continue to submit order");
+                continue;
             }
 
             String orderCode = genOrderCode(record.getProdId());
@@ -58,21 +70,16 @@ public class OrderServiceImpl implements OrderService {
             record.setStateDate(new Date());
             record.setCount(1);
             misOrderMapper.insert(record);
-
-            MisProdDef bean = new MisProdDef();
-            bean.setProdId(record.getProdId());
-            bean.setInStock(prodDef.getInStock() - 1);
-            updateMisProdDef(bean);
+            return record.getOrderId();
         }
 
-        return record.getOrderId();
+        return 0;
     }
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public int updateMisProdDef(MisProdDef record) {
-        misProdDefMapper.updateByPrimaryKeySelective(record);
-        return record.getProdId();
+        return misProdDefMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override

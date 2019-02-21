@@ -99,7 +99,7 @@ public class HighTest {
 
             MisOrder order = new MisOrder();
             order.setCustId((int)Thread.currentThread().getId());
-            order.setProdId(10000);
+            order.setProdId(200004);
             orderService.insertMisOrder(order);
 //            String orderCode = orderService.genOrderCode();
 //            System.out.println(orderCode);

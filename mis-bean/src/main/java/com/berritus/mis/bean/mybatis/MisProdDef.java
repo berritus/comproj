@@ -18,6 +18,16 @@ public class MisProdDef extends MisBean {
 
     private Date crtDate;
 
+    private Integer version;
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public Integer getProdId() {
         return prodId;
     }

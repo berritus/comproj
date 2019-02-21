@@ -8,9 +8,10 @@
     <result column="in_stock" jdbcType="INTEGER" property="inStock" />
     <result column="total" jdbcType="INTEGER" property="total" />
     <result column="crt_date" jdbcType="TIMESTAMP" property="crtDate" />
+    <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    prod_id, prod_code, prod_name, in_stock, total, crt_date
+    prod_id, prod_code, prod_name, in_stock, total, crt_date, version
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -52,6 +53,9 @@
       <if test="crtDate != null">
         crt_date,
       </if>
+      <if test="version != null">
+        version,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="prodId != null">
@@ -72,6 +76,9 @@
       <if test="crtDate != null">
         #{crtDate,jdbcType=TIMESTAMP},
       </if>
+
+      #{version,jdbcType=INTEGER},
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.berritus.mis.bean.mybatis.MisProdDef">
@@ -92,8 +99,10 @@
       <if test="crtDate != null">
         crt_date = #{crtDate,jdbcType=TIMESTAMP},
       </if>
+
+      version = version + 1,
     </set>
-    where prod_id = #{prodId,jdbcType=INTEGER}
+    where prod_id = #{prodId,jdbcType=INTEGER} and version = #{version,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.berritus.mis.bean.mybatis.MisProdDef">
     update mis_prod_def
@@ -101,6 +110,7 @@
       prod_name = #{prodName,jdbcType=VARCHAR},
       in_stock = #{inStock,jdbcType=INTEGER},
       total = #{total,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
       crt_date = #{crtDate,jdbcType=TIMESTAMP}
     where prod_id = #{prodId,jdbcType=INTEGER}
   </update>
