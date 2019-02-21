@@ -17,4 +17,6 @@ public interface OrderService {
     int updateMisProdDef(MisProdDef record);
 
     int insertMisProdDef(MisProdDef record);
+
+    long insertMisOrder2(MisOrder record);
 }

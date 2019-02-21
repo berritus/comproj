@@ -23,13 +23,15 @@ import java.text.ParseException;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MisApplication.class)
 public class HighTest {
     @Autowired
     private QrySysService qrySysService;
-    private final int MAX_COUNT = 200;
+    private final int MAX_COUNT = 1;
     private CountDownLatch countDownLatch = new CountDownLatch(1);
     @Autowired
     @Qualifier("sysService")
@@ -91,16 +93,16 @@ public class HighTest {
 
         @Override
         public void run() {
-            try {
-                countDownLatch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                countDownLatch.await();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             MisOrder order = new MisOrder();
             order.setCustId((int)Thread.currentThread().getId());
-            order.setProdId(200004);
-            orderService.insertMisOrder(order);
+            order.setProdId(10000);
+            orderService.insertMisOrder2(order);
 //            String orderCode = orderService.genOrderCode();
 //            System.out.println(orderCode);
 //            try {
@@ -112,14 +114,26 @@ public class HighTest {
     }
 
     @Test
+    public void test5() throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(50);
+        ThreadOrder threadOrder = new ThreadOrder();
+        for (int i = 0; i < 300; i++){
+            executorService.submit(threadOrder);
+        }
+
+        Thread.sleep(30000);
+    }
+
+    @Test
     public void test4() throws InterruptedException {
         ThreadOrder threadOrder = new ThreadOrder();
-        for (int i = 0; i < MAX_COUNT; i++){
+        for (int i = 0; i < 300; i++){
             new Thread(threadOrder).start();
         }
 
         countDownLatch.countDown();
-        Thread.sleep(15000);
+
+        Thread.sleep(30000);
     }
 
     @Test
@@ -186,5 +200,11 @@ public class HighTest {
         context.setVariable("args", args);
         String str1 = parser.parseExpression("'fileId:' + #args[1]").getValue(context, String.class);
         System.out.println(str1);
+    }
+
+    @Test
+    public void testTime(){
+        long times = System.currentTimeMillis();
+        System.out.println(times);
     }
 }

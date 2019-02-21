@@ -99,10 +99,14 @@
       <if test="crtDate != null">
         crt_date = #{crtDate,jdbcType=TIMESTAMP},
       </if>
-
-      version = version + 1,
+      <if test="version != null">
+        version = version + 1,
+      </if>
     </set>
-    where prod_id = #{prodId,jdbcType=INTEGER} and version = #{version,jdbcType=INTEGER}
+    where prod_id = #{prodId,jdbcType=INTEGER}
+    <if test="version != null">
+      and version = #{version,jdbcType=INTEGER}
+    </if>
   </update>
   <update id="updateByPrimaryKey" parameterType="com.berritus.mis.bean.mybatis.MisProdDef">
     update mis_prod_def

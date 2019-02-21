@@ -1,6 +1,7 @@
 package com.berritus.mis.dubbo.api;
 
 
+import com.berritus.mis.bean.mybatis.MisProdDef;
 import com.berritus.mis.bean.school.TbStudent;
 
 /**
