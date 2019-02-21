@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/mis-bean" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-controller" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-dubbo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-dubbo-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-pcweb" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-query" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-security" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mis-task" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/misparent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/misweb" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,2 @@
+blockDubboLogFilter=com.berritus.mis.dubbo.filter.BlockDubboLogFilter
+authFilter=com.berritus.mis.dubbo.filter.AuthFilter

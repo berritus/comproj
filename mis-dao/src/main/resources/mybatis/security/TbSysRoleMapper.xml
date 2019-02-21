@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.berritus.mis.dao.security.TbSysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.berritus.mis.bean.security.TbSysRole">
+    <id column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
+    <result column="crt_date" jdbcType="TIMESTAMP" property="crtDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rid, role_name, role_desc, crt_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_role
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <select id="getUserRoles" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select b.* from tb_sys_user a, tb_sys_role b, tb_sys_user_role c
+    where a.uid = c.uid and b.rid = c.rid and a.state = 0 and a.user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  <select id="getResourceRoles" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select b.* from tb_sys_role_resource a, tb_sys_role b
+    where a.res_id = #{resId,jdbcType=INTEGER} and a.rid = b.rid
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_sys_role
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="tbSysRole">
+    insert into tb_sys_role (rid, role_name, role_desc, 
+      crt_date)
+    values (#{rid,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
+      #{crtDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="tbSysRole">
+    insert into tb_sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleDesc != null">
+        role_desc,
+      </if>
+      <if test="crtDate != null">
+        crt_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null">
+        #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tbSysRole">
+    update tb_sys_role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        role_desc = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null">
+        crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tbSysRole">
+    update tb_sys_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_desc = #{roleDesc,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=TIMESTAMP}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

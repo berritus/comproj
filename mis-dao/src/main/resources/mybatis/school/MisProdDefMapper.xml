@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.berritus.mis.dao.MisProdDefMapper">
+  <resultMap id="BaseResultMap" type="com.berritus.mis.bean.mybatis.MisProdDef">
+    <id column="prod_id" jdbcType="INTEGER" property="prodId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+    <result column="in_stock" jdbcType="INTEGER" property="inStock" />
+    <result column="total" jdbcType="INTEGER" property="total" />
+    <result column="crt_date" jdbcType="TIMESTAMP" property="crtDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    prod_id, prod_code, prod_name, in_stock, total, crt_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mis_prod_def
+    where prod_id = #{prodId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mis_prod_def
+    where prod_id = #{prodId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.berritus.mis.bean.mybatis.MisProdDef"
+   useGeneratedKeys="true" keyColumn="prod_id" keyProperty="prodId">
+    insert into mis_prod_def (prod_id, prod_code, prod_name, 
+      in_stock, total, crt_date
+      )
+    values (#{prodId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, 
+      #{inStock,jdbcType=INTEGER}, #{total,jdbcType=INTEGER}, #{crtDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.berritus.mis.bean.mybatis.MisProdDef">
+    insert into mis_prod_def
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        prod_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="prodName != null">
+        prod_name,
+      </if>
+      <if test="inStock != null">
+        in_stock,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="crtDate != null">
+        crt_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        #{prodId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="inStock != null">
+        #{inStock,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="crtDate != null">
+        #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.berritus.mis.bean.mybatis.MisProdDef">
+    update mis_prod_def
+    <set>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        prod_name = #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="inStock != null">
+        in_stock = #{inStock,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="crtDate != null">
+        crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where prod_id = #{prodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.berritus.mis.bean.mybatis.MisProdDef">
+    update mis_prod_def
+    set prod_code = #{prodCode,jdbcType=VARCHAR},
+      prod_name = #{prodName,jdbcType=VARCHAR},
+      in_stock = #{inStock,jdbcType=INTEGER},
+      total = #{total,jdbcType=INTEGER},
+      crt_date = #{crtDate,jdbcType=TIMESTAMP}
+    where prod_id = #{prodId,jdbcType=INTEGER}
+  </update>
+</mapper>

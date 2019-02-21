@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<contextName>mislog</contextName>
+	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
+	<!---->
+	<property name="LOG_HOME" value="F:/IdeaProjects/mylog" />
+	<!--
+	<property name="LOG_HOME" value="/root/mylog" />
+	-->
+	<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+	<property name="PATTERN" value="[%t]%d{HH:mm:ss.SSS} %-5level %logger{48} - %msg%n" />
+	<!-- 日志文件保留天数 -->
+	<property name="MAX_HISTORY" value="10" />
+	<!-- 日志最大文件大小 -->
+	<property name="MAX_FILE_SIZE" value="50MB" />
+	<!-- 日志文件扩展名 -->
+	<property name="LOG_EXTFILE" value="log" />
+
+	<!--TRACE < DEBUG < INFO < WARN < ERROR < FATAL-->
+	<!-- 控制台输出 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<!-- 按照每天生成日志文件 -->
+	<appender name="DEFAULT_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/default.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="DBLOG_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/dblog.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="SERVICE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/service.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="CONTROLLER_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/controller.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="TASK_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/task.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="DUBBO_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/dubbo.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="COMMON_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/common.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+	<appender name="QUERY_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/query.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="CORE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/core.%d{yyyyMMdd}.%i.${LOG_EXTFILE}</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${MAX_HISTORY}</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件超过大小再重新起一份-->
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<!--  -->
+	<logger name="com.berritus.mis.service" level="WARN" additivity="false">
+		<appender-ref ref="SERVICE_APPENDER" />
+	</logger>
+	<logger name="com.berritus.mis.controller" level="WARN" additivity="false">
+		<appender-ref ref="CONTROLLER_APPENDER" />
+	</logger>
+	<logger name="com.berritus.mis.task" level="WARN" additivity="false">
+		<appender-ref ref="TASK_APPENDER" />
+	</logger>
+	<logger name="com.berritus.mis.query" level="WARN" additivity="false">
+		<appender-ref ref="QUERY_APPENDER" />
+	</logger>
+	<logger name="com.berritus.mis.dubbo" level="WARN" additivity="false">
+		<appender-ref ref="DUBBO_APPENDER" />
+	</logger>
+	<logger name="com.berritus.mis.common" level="WARN" additivity="false">
+		<appender-ref ref="COMMON_APPENDER" />
+	</logger>
+	<logger name="com.berritus.mis.core" level="WARN" additivity="false">
+		<appender-ref ref="CORE_APPENDER" />
+	</logger>
+	<!-- mybatis 打印sql -->
+	<!--DBLOG_APPENDER-->
+	<logger name="com.berritus.mis.dao" level="DEBUG" additivity="false">
+		<appender-ref ref="DBLOG_APPENDER" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+	<!-- root -->
+	<root level="DEBUG">
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</configuration>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.berritus.mis.dao.security.TbSysResourceMapper">
+  <resultMap id="BaseResultMap" type="com.berritus.mis.bean.security.TbSysResource">
+    <id column="res_id" jdbcType="INTEGER" property="resId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="url_name" jdbcType="VARCHAR" property="urlName" />
+    <result column="crt_date" jdbcType="TIMESTAMP" property="crtDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    res_id, url, url_name, crt_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_resource
+    where res_id = #{resId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUrl" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_sys_resource
+    where url = #{url,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_sys_resource
+    where res_id = #{resId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="tbSysResource">
+    insert into tb_sys_resource (res_id, url, url_name, 
+      crt_date)
+    values (#{resId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{urlName,jdbcType=VARCHAR}, 
+      #{crtDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="tbSysResource">
+    insert into tb_sys_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resId != null">
+        res_id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="urlName != null">
+        url_name,
+      </if>
+      <if test="crtDate != null">
+        crt_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resId != null">
+        #{resId,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="urlName != null">
+        #{urlName,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null">
+        #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tbSysResource">
+    update tb_sys_resource
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="urlName != null">
+        url_name = #{urlName,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null">
+        crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where res_id = #{resId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tbSysResource">
+    update tb_sys_resource
+    set url = #{url,jdbcType=VARCHAR},
+      url_name = #{urlName,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=TIMESTAMP}
+    where res_id = #{resId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mis-bean" />
+        <module name="mis-common" />
+        <module name="mis-controller" />
+        <module name="mis-dao" />
+        <module name="mis-dubbo" />
+        <module name="mis-dubbo-api" />
+        <module name="mis-pcweb" />
+        <module name="mis-query" />
+        <module name="mis-security" />
+        <module name="mis-service" />
+        <module name="mis-task" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mis-bean" target="1.8" />
+      <module name="mis-common" target="1.8" />
+      <module name="mis-controller" target="1.8" />
+      <module name="mis-dao" target="1.8" />
+      <module name="mis-dubbo" target="1.8" />
+      <module name="mis-dubbo-api" target="1.8" />
+      <module name="mis-pcweb" target="1.8" />
+      <module name="mis-query" target="1.8" />
+      <module name="mis-security" target="1.8" />
+      <module name="mis-service" target="1.8" />
+      <module name="mis-task" target="1.8" />
+      <module name="mis-web" target="1.5" />
+      <module name="misparent" target="1.8" />
+      <module name="misweb" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
