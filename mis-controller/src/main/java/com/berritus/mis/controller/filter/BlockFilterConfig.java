@@ -1,5 +1,6 @@
 package com.berritus.mis.controller.filter;
 
+import com.berritus.mis.core.controller.filter.SessionCheckFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
 /**

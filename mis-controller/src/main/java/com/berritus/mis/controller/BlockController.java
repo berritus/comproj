@@ -4,8 +4,9 @@ package com.berritus.mis.controller;
 import com.berritus.mis.bean.mybatis.SysFiles;
 import com.berritus.mis.bean.school.TbStudent;
 import com.berritus.mis.bean.security.TbSysUser;
-import com.berritus.mis.controller.annotation.MisLogger;
+//import com.berritus.mis.controller.annotation.MisLogger;
 import com.berritus.mis.core.cache.redis.RedisService;
+import com.berritus.mis.core.controller.annotation.MisLogger;
 import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.dubbo.api.SecurityService;
 import com.berritus.mis.dubbo.api.SysService;
@@ -32,7 +33,7 @@ public class BlockController {
     @RequestMapping("/")
     public String helloDubbo(HttpServletRequest request){
         String sessionId = request.getSession().getId();
-        redisService.set("sessionId", sessionId, 90L);
+        redisService.set("sessionId", sessionId, (long)90);
         return dubboDemoService.helloDubbo() + ",sessionId = " + sessionId;
     }
 

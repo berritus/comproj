@@ -3,6 +3,7 @@ package com.berritus.mis.query;
 import com.berritus.mis.bean.mybatis.MisOrder;
 import com.berritus.mis.bean.mybatis.SysFiles;
 import com.berritus.mis.controller.conf.MisApplication;
+import com.berritus.mis.core.cache.redis.RedisService;
 import com.berritus.mis.dubbo.api.OrderService;
 import com.berritus.mis.dubbo.api.QrySysService;
 import com.berritus.mis.dubbo.api.SysService;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
@@ -40,6 +42,8 @@ public class HighTest {
     private RedisTemplate redisTemplate;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private RedisService redisService;
 
     private class ThreadTest implements Runnable{
         @Override
@@ -111,6 +115,38 @@ public class HighTest {
 //                e.printStackTrace();
 //            }
         }
+    }
+
+    @Test
+    public void test6(){
+        String value = UUID.randomUUID().toString();
+        redisService.set("10002", value, (long)20);
+        //redisTemplate.opsForValue().set("10001", value);
+
+        SysFiles bean = new SysFiles();
+        bean.setFileId(1000004);
+        SysFiles sysFiles = qrySysService.qrySysFiles2(bean);
+        redisService.set(sysFiles.getFileId() + "", sysFiles, (long)30);
+
+        SysFiles bean2 = (SysFiles)redisService.get(sysFiles.getFileId() + "");
+        System.out.println(bean2.getFileName());
+
+        boolean flag = redisService.exists(bean2.getFileId() + "");
+        if(flag){
+            System.out.println("exists key");
+        }else{
+            System.out.println("not exists key");
+        }
+
+        redisService.remove(bean2.getFileId() + "");
+
+        flag = redisService.exists(bean2.getFileId() + "");
+        if(flag){
+            System.out.println("exists key");
+        }else{
+            System.out.println("not exists key");
+        }
+        //redisTemplate.opsForValue().set(bean.getFileId() + "", bean);
     }
 
     @Test
