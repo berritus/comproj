@@ -20,8 +20,6 @@ public class QrySysServiceImpl implements QrySysService {
     private SysFilesMapper sysFilesMapper;
     @Autowired
     private RedisTemplate redisTemplate;
-    @Autowired
-    private TbSysTaskMapper sysTaskMapper;
 
     @Override
     public SysFiles qrySysFiles(Integer fileId) {
@@ -63,7 +61,6 @@ public class QrySysServiceImpl implements QrySysService {
 
         TbSysTask bean = new TbSysTask();
         bean.setState("S0A");
-        sysTaskMapper.selectSysTasks(bean);
         return sysFiles;
     }
 }
