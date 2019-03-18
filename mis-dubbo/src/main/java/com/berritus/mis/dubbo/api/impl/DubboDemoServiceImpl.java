@@ -23,7 +23,7 @@ public class DubboDemoServiceImpl implements DubboDemoService {
     @Override
     public TbStudent addStudent(TbStudent student){
         demoService.addStudent(student);
-
+        int i = 10 / 0;
         return student;
     }
 }

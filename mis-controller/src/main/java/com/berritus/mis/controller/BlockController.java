@@ -51,6 +51,7 @@ public class BlockController {
         return "sessionId1 = " + sessionId + ",sessionId redis = " + session;
     }
 
+    //localhost:8081/student/add
     @MisLogger
     @RequestMapping("/student/add")
     public TbStudent addStudent(@RequestBody TbStudent student){
