@@ -10,6 +10,8 @@ import com.berritus.mis.core.controller.annotation.MisLogger;
 import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.dubbo.api.SecurityService;
 import com.berritus.mis.dubbo.api.SysService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class BlockController {
+    private Logger logger = LoggerFactory.getLogger(BlockController.class);
+
     @Autowired
     private DubboDemoService dubboDemoService;
     @Autowired
@@ -34,6 +38,7 @@ public class BlockController {
     public String helloDubbo(HttpServletRequest request){
         String sessionId = request.getSession().getId();
         redisService.set("sessionId", sessionId, (long)90);
+        logger.warn("helloDubbo");
         return dubboDemoService.helloDubbo() + ",sessionId = " + sessionId;
     }
 

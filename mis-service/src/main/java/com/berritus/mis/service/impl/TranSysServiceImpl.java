@@ -20,7 +20,7 @@ public class TranSysServiceImpl implements SysService {
     public int insertSysFiles(SysFiles record) {
         record.setCrtDate(new Date());
         sysFilesMapper.insert(record);
-        int i = 1 /0;
+        //int i = 1 /0;
         return record.getFileId();
     }
 

@@ -5,6 +5,7 @@ import com.berritus.mis.bean.mybatis.SysFiles;
 import com.berritus.mis.bean.school.TbStudent;
 import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.dubbo.api.SysService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,14 +20,17 @@ public class PcWebController {
     //调远程需要填写URL，不然会调不通
     //@Reference(url = "dubbo://111.230.165.59:20880" version = "1.0.1", timeout = 30000)
     //调本地不需要URL也行
-    @Reference(timeout = 30000, version = "1.0.2")
+    //@Reference(timeout = 30000, version = "${dubbo.version}")
+    @Reference(version = "1.0.2")
     private DubboDemoService dubboDemoService;
-    @Reference(timeout = 30000)
+    @Reference
     private SysService sysService;
+    //@Value("${dubbo.version}")
+    private String dubboVersion;
 
     @RequestMapping("/")
     public String helloDubbo(){
-        return dubboDemoService.helloDubbo();
+        return dubboDemoService.helloDubbo() + dubboVersion;
     }
 
     @RequestMapping("/student/add")

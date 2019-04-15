@@ -11,7 +11,8 @@ import java.util.Date;
 
 @Transactional
 @Service("sysService")
-@com.alibaba.dubbo.config.annotation.Service(interfaceClass = SysService.class, timeout = 10000)
+@com.alibaba.dubbo.config.annotation.Service(
+        interfaceClass = SysService.class, version = "1.0.1", timeout = 10000)
 public class SysServiceImpl implements SysService {
     @Autowired
     private SysFilesMapper sysFilesMapper;

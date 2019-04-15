@@ -29,6 +29,7 @@
         <java.version>1.8</java.version>
         <module.version>1.0-SNAPSHOT</module.version>
         <core.module.version>mis520.0.1</core.module.version>
+        <class.path></class.path>
     </properties>
 
     <dependencyManagement>

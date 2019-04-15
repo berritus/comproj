@@ -14,7 +14,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 @Component
-@Service(interfaceClass = QrySysService.class, timeout = 10000)
+@Service(interfaceClass = QrySysService.class)
 public class QrySysServiceImpl implements QrySysService {
     @Autowired
     private SysFilesMapper sysFilesMapper;

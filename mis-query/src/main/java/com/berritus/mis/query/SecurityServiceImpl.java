@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@Service(interfaceClass = SecurityService.class, timeout = 10000)
+@Service(interfaceClass = SecurityService.class)
 public class SecurityServiceImpl implements SecurityService {
     @Autowired
     private TbSysUserMapper sysUserMapper;

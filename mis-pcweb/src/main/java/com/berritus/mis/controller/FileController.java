@@ -12,6 +12,7 @@ import com.mongodb.gridfs.GridFSDBFile;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -43,6 +44,7 @@ public class FileController {
     private SysService sysService;
     @Reference(timeout = 30000)
     private QrySysService qrySysService;
+
 
 
     //http://localhost:8083/upload

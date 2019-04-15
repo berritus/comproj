@@ -2,7 +2,7 @@ package com.berritus.mis.controller.conf;
 
 import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import com.berritus.mis.core.cache.annotation.EnableMisCache;
-import com.berritus.mis.core.controller.annotation.EnableMisController;
+//import com.berritus.mis.core.controller.annotation.EnableMisController;
 import com.berritus.mis.core.task.annotation.EnableMisTask;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

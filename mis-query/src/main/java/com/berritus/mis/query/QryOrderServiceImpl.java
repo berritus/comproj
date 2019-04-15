@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@Service(interfaceClass = QryOrderService.class, timeout = 60000)
+@Service(interfaceClass = QryOrderService.class)
 public class QryOrderServiceImpl implements QryOrderService {
     @Autowired
     private MisProdDefMapper misProdDefMapper;
