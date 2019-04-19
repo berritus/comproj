@@ -27,7 +27,7 @@
             <version>${module.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.berritus.mis</groupId>
+            <groupId>com.berritus.core</groupId>
             <artifactId>mis-core-dao</artifactId>
         </dependency>
     </dependencies>

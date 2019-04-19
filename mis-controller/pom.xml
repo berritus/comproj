@@ -21,7 +21,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.berritus.mis</groupId>
+            <groupId>com.berritus.core</groupId>
             <artifactId>mis-core-controller</artifactId>
         </dependency>
         <dependency>

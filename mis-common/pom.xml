@@ -27,11 +27,11 @@
             <version>${module.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.berritus.mis</groupId>
+            <groupId>com.berritus.core</groupId>
             <artifactId>mis-core-cache</artifactId>
             <exclusions>
                 <exclusion>
-                    <groupId>com.berritus.mis</groupId>
+                    <groupId>com.berritus.core</groupId>
                     <artifactId>mis-core-bean</artifactId>
                 </exclusion>
             </exclusions>
