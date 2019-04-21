@@ -31,7 +31,7 @@ import java.util.concurrent.Executors;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MisApplication.class)
 public class HighTest {
-    @Autowired
+    @Autowired@Value
     private QrySysService qrySysService;
     private final int MAX_COUNT = 1;
     private CountDownLatch countDownLatch = new CountDownLatch(1);
