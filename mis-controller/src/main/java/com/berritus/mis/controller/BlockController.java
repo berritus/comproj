@@ -10,6 +10,9 @@ import com.berritus.mis.core.controller.annotation.MisLogger;
 import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.dubbo.api.SecurityService;
 import com.berritus.mis.dubbo.api.SysService;
+import com.dianping.cat.Cat;
+import com.dianping.cat.message.Event;
+import com.dianping.cat.message.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +37,26 @@ public class BlockController {
     private SysService sysService;
 
     @MisLogger
-    @RequestMapping("/")
+    @RequestMapping("/mis")
     public String helloDubbo(HttpServletRequest request){
-        String sessionId = request.getSession().getId();
-        redisService.set("sessionId", sessionId, (long)90);
-        logger.warn("helloDubbo");
+        Transaction t = Cat.newTransaction("helloDubbo", "redisService.set");
+        String sessionId = "";
+        try{
+            Cat.logEvent("helloDubbo", "redisService.set", Event.SUCCESS, "ip=${serverIp}");
+            Cat.logMetricForCount("metric.key");
+            Cat.logMetricForDuration("metric.key", 5);
+
+            sessionId = request.getSession().getId();
+            redisService.set("sessionId", sessionId, (long)90);
+            logger.warn("helloDubbo");
+            t.setStatus(Transaction.SUCCESS);
+        }catch (Exception e){
+            t.setStatus(e);
+            Cat.logError(e);
+        } finally{
+            t.complete();
+        }
+
         return dubboDemoService.helloDubbo() + ",sessionId = " + sessionId;
     }
 

@@ -12,6 +12,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @MapperScan({"com.berritus.mis.dao"})
@@ -23,9 +24,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ServletComponentScan({"com.berritus.mis.controller.conf"})
 @EnableDubboConfiguration
 @EnableAspectJAutoProxy
-@EnableMisTask
+//@EnableMisTask
 @EnableMisCache
 //@EnableMisController
+@EnableAsync
 public class MisApplication {
     public static void main(String[] args){
         SpringApplication.run(MisApplication.class, args);
