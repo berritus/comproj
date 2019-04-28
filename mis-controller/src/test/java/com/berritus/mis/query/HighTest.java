@@ -28,6 +28,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 高并发测试
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MisApplication.class)
 public class HighTest {

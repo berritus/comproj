@@ -36,10 +36,11 @@ public class BlockController {
     @Autowired
     private SysService sysService;
 
+    // http://localhost:8081/mis
     @MisLogger
     @RequestMapping("/mis")
     public String helloDubbo(HttpServletRequest request){
-        Transaction t = Cat.newTransaction("helloDubbo", "redisService.set");
+        Transaction t = Cat.newTransaction("/mis", "redisService.set");
         String sessionId = "";
         try{
             Cat.logEvent("helloDubbo", "redisService.set", Event.SUCCESS, "ip=${serverIp}");
