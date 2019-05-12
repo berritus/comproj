@@ -22,6 +22,7 @@
         <module>../mis-dubbo</module>
         <module>../mis-dubbo-api</module>
         <module>../mis-task</module>
+        <module>../mis-junit</module>
     </modules>
     <packaging>pom</packaging>
 
