@@ -28,7 +28,7 @@ public class PcWebController {
     //@Value("${dubbo.version}")
     private String dubboVersion;
 
-    @RequestMapping("/")
+    @RequestMapping("/helloDubbo")
     public String helloDubbo(){
         return dubboDemoService.helloDubbo() + dubboVersion;
     }

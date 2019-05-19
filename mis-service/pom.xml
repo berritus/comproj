@@ -35,6 +35,10 @@
             <artifactId>mis-dubbo-api</artifactId>
             <version>${module.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.dianping.cat</groupId>
+            <artifactId>cat-client</artifactId>
+        </dependency>
     </dependencies>
 
 

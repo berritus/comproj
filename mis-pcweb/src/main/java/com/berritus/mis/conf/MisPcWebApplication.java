@@ -8,7 +8,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 
 @SpringBootApplication
 @ComponentScan({"com.berritus.mis"})
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 180, redisNamespace = "tl")
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800, redisNamespace = "tl")
 @EnableDubboConfiguration
 public class MisPcWebApplication {
     public static void main(String[] args){

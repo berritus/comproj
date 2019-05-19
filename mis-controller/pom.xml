@@ -40,10 +40,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.dianping.cat</groupId>
-            <artifactId>cat-client</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
