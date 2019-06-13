@@ -2,11 +2,14 @@ package com.berritus.mis.query;
 
 import com.berritus.mis.bean.mybatis.MisOrder;
 import com.berritus.mis.bean.mybatis.SysFiles;
+import com.berritus.mis.bean.mybatis.SysServiceConfig;
 import com.berritus.mis.controller.conf.MisApplication;
 import com.berritus.mis.core.cache.redis.RedisService;
+import com.berritus.mis.dubbo.api.IDemoService;
 import com.berritus.mis.dubbo.api.OrderService;
 import com.berritus.mis.dubbo.api.QrySysService;
 import com.berritus.mis.dubbo.api.SysService;
+import com.berritus.mis.service.base.MsgSendBaseService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +50,23 @@ public class HighTest {
     private OrderService orderService;
     @Autowired
     private RedisService redisService;
+    @Autowired
+    @Qualifier("demoService1")
+    private IDemoService demoService;
+    @Autowired
+    private MsgSendBaseService msgSendBaseService;
+
+    @Test
+    public void testAdapter() {
+        //demoService.method1();
+        //demoService.method2();
+
+        SysServiceConfig sysServiceConfig = new SysServiceConfig();
+        sysServiceConfig.setApplicationCode("123");
+        sysServiceConfig.setServiceType(1000);
+        sysServiceConfig.setState(0);
+        msgSendBaseService.sender(sysServiceConfig);
+    }
 
     private class ThreadTest implements Runnable{
         @Override

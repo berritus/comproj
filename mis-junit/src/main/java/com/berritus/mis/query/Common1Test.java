@@ -57,19 +57,4 @@ public class Common1Test {
 
         Thread.sleep(100000);
     }
-
-    /**
-     * Collections.sort(listDocNoteMans, new Comparator<DocNoteMan>() {
-     *
-     *                                @Override
-     * 				public int compare(DocNoteMan o1, DocNoteMan o2) {
-     * 					if (o1.getSort() > o2.getSort()) {
-     * 						return 1;
-     * 					} else if (o1.getSort() < o2.getSort()) {
-     * 						return -1;
-     * 					}
-     * 					return 0;
-     * 				}
-     * 			});
-     */
 }

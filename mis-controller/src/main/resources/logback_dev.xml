@@ -3,7 +3,7 @@
 	<contextName>mislog</contextName>
 	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
 
-	<property name="LOG_HOME" value="F:/spring-proj/mylog" />
+	<property name="LOG_HOME" value="E:/spring-proj/mylog" />
 
 	<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
 	<property name="PATTERN" value="[%t]%d{HH:mm:ss.SSS} %-5level %logger{48} - %msg%n" />

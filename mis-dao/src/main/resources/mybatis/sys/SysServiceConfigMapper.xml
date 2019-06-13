@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.berritus.mis.dao.SysServiceConfigMapper">
+    <resultMap id="BaseResultMap" type="com.berritus.mis.bean.mybatis.SysServiceConfig">
+        <id column="seq_id" property="seqId" jdbcType="BIGINT"/>
+        <result column="application_code" property="applicationCode" jdbcType="VARCHAR"/>
+        <result column="service_type" property="serviceType" jdbcType="INTEGER"/>
+        <result column="component_name" property="componentName" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="state_date" property="stateDate" jdbcType="TIMESTAMP"/>
+        <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    seq_id, application_code, service_type, component_name, state, state_date, crt_date, 
+    remark
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_service_config
+        where seq_id = #{seqId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectBySysServiceConfig" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_service_config
+        <where>
+            <if test="seqId != null"> and seq_id = #{seqId,jdbcType=BIGINT} </if>
+            <if test="applicationCode != null"> and application_code = #{applicationCode,jdbcType=VARCHAR} </if>
+            <if test="serviceType != null"> and service_type = #{serviceType,jdbcType=INTEGER} </if>
+            <if test="componentName != null"> and component_name = #{componentName,jdbcType=VARCHAR} </if>
+            <if test="state != null"> and state = #{state,jdbcType=INTEGER} </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_service_config
+    where seq_id = #{seqId,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.berritus.mis.bean.mybatis.SysServiceConfig">
+    insert into sys_service_config (seq_id, application_code, service_type, 
+      component_name, state, state_date, 
+      crt_date, remark)
+    values (#{seqId,jdbcType=BIGINT}, #{applicationCode,jdbcType=VARCHAR}, #{serviceType,jdbcType=INTEGER}, 
+      #{componentName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{stateDate,jdbcType=TIMESTAMP}, 
+      #{crtDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.berritus.mis.bean.mybatis.SysServiceConfig">
+        insert into sys_service_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="seqId != null">
+                seq_id,
+            </if>
+            <if test="applicationCode != null">
+                application_code,
+            </if>
+            <if test="serviceType != null">
+                service_type,
+            </if>
+            <if test="componentName != null">
+                component_name,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="stateDate != null">
+                state_date,
+            </if>
+            <if test="crtDate != null">
+                crt_date,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="seqId != null">
+                #{seqId,jdbcType=BIGINT},
+            </if>
+            <if test="applicationCode != null">
+                #{applicationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceType != null">
+                #{serviceType,jdbcType=INTEGER},
+            </if>
+            <if test="componentName != null">
+                #{componentName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="stateDate != null">
+                #{stateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtDate != null">
+                #{crtDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.berritus.mis.bean.mybatis.SysServiceConfig">
+        update sys_service_config
+        <set>
+            <if test="applicationCode != null">
+                application_code = #{applicationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceType != null">
+                service_type = #{serviceType,jdbcType=INTEGER},
+            </if>
+            <if test="componentName != null">
+                component_name = #{componentName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="stateDate != null">
+                state_date = #{stateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtDate != null">
+                crt_date = #{crtDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where seq_id = #{seqId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.berritus.mis.bean.mybatis.SysServiceConfig">
+    update sys_service_config
+    set application_code = #{applicationCode,jdbcType=VARCHAR},
+      service_type = #{serviceType,jdbcType=INTEGER},
+      component_name = #{componentName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      state_date = #{stateDate,jdbcType=TIMESTAMP},
+      crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where seq_id = #{seqId,jdbcType=BIGINT}
+  </update>
+</mapper>
