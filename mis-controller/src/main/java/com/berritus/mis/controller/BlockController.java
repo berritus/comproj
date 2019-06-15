@@ -4,9 +4,8 @@ package com.berritus.mis.controller;
 import com.berritus.mis.bean.mybatis.SysFiles;
 import com.berritus.mis.bean.school.TbStudent;
 import com.berritus.mis.bean.security.TbSysUser;
-//import com.berritus.mis.controller.annotation.MisLogger;
 import com.berritus.mis.core.cache.redis.RedisService;
-import com.berritus.mis.core.controller.annotation.MisLogger;
+import com.berritus.mis.core.component.annotation.MisLogger;
 import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.dubbo.api.SecurityService;
 import com.berritus.mis.dubbo.api.SysService;
@@ -22,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+
+//import com.berritus.mis.controller.annotation.MisLogger;
 
 @RestController
 public class BlockController {
@@ -92,4 +93,6 @@ public class BlockController {
     public int insertSysFiles(@RequestBody SysFiles record){
         return sysService.insertSysFiles(record);
     }
+
+
 }

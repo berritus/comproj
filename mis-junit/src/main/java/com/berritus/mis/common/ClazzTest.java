@@ -1,6 +1,5 @@
-package com.berritus.mis.query;
+package com.berritus.mis.common;
 
-import javafx.scene.effect.SepiaTone;
 import org.junit.Test;
 
 import java.io.File;
@@ -11,7 +10,10 @@ import java.lang.reflect.Method;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 

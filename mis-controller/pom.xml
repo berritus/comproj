@@ -40,6 +40,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.berritus.core</groupId>
+            <artifactId>mis-core-component</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

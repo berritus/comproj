@@ -1,4 +1,4 @@
-package com.berritus.mis.query;
+package com.berritus.mis.common;
 
 import cn.hutool.core.math.MathUtil;
 import org.junit.Test;

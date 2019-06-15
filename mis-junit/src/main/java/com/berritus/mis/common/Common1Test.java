@@ -1,6 +1,8 @@
-package com.berritus.mis.query;
+package com.berritus.mis.common;
 
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -57,4 +59,6 @@ public class Common1Test {
 
         Thread.sleep(100000);
     }
+
+
 }

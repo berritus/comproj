@@ -1,8 +1,10 @@
 package com.berritus.mis.controller.conf;
 
 import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
+import com.berritus.mis.core.component.annotation.EnableCoreComponent;
 import com.berritus.mis.core.cache.annotation.EnableMisCache;
 //import com.berritus.mis.core.controller.annotation.EnableMisController;
+import com.berritus.mis.core.controller.annotation.EnableMisController;
 import com.berritus.mis.core.task.annotation.EnableMisTask;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -26,8 +28,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAspectJAutoProxy
 //@EnableMisTask
 @EnableMisCache
-//@EnableMisController
+@EnableMisController
 @EnableAsync
+@EnableCoreComponent
 public class MisApplication {
     public static void main(String[] args){
         SpringApplication.run(MisApplication.class, args);
