@@ -11,7 +11,7 @@ public class SysServiceConfig extends MisBean {
 
     private String applicationCode;
 
-    private Integer serviceType;
+    private String serviceType;
 
     private String componentName;
 
@@ -39,11 +39,11 @@ public class SysServiceConfig extends MisBean {
         this.applicationCode = applicationCode == null ? null : applicationCode.trim();
     }
 
-    public Integer getServiceType() {
+    public String getServiceType() {
         return serviceType;
     }
 
-    public void setServiceType(Integer serviceType) {
+    public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
     }
 
