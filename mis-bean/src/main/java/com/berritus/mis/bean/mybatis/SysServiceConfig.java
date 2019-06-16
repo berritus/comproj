@@ -11,7 +11,9 @@ public class SysServiceConfig extends MisBean {
 
     private String applicationCode;
 
-    private String serviceType;
+    private String engineType;
+
+    private String serviceInterface;
 
     private String componentName;
 
@@ -39,12 +41,12 @@ public class SysServiceConfig extends MisBean {
         this.applicationCode = applicationCode == null ? null : applicationCode.trim();
     }
 
-    public String getServiceType() {
-        return serviceType;
+    public String getServiceInterface() {
+        return serviceInterface;
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setServiceInterface(String serviceInterface) {
+        this.serviceInterface = serviceInterface;
     }
 
     public String getComponentName() {
@@ -83,7 +85,17 @@ public class SysServiceConfig extends MisBean {
         return remark;
     }
 
+    public String getEngineType() {
+        return engineType;
+    }
+
+    public void setEngineType(String engineType) {
+        this.engineType = engineType;
+    }
+
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+
 }

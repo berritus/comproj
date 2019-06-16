@@ -7,13 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
  * @Copyright:
  * @Description:
  * @Author: Qin Guihe
- * @Create: 2019-06-13 11:52
+ * @Create: 2019-06-13 11:50
  */
-@Service("demoService2")
+@Service("msgSendServiceSg")
 @Transactional
-public class DemoService2 extends AbstractDemoService {
+public class MsgSendServiceSgImpl extends AbstractMsgSendService {
+
 	@Override
-	public void method1() {
-		System.out.println("这是现场2 method1方法实现");
+	public void sendSms(String msg) {
+		System.out.println("这是现场 SG sendSms方法实现，" + msg);
 	}
 }

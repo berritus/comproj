@@ -1,5 +1,6 @@
 package com.berritus.mis.common;
 
+import com.berritus.mis.service.base.BaseServiceEngine;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -60,5 +61,10 @@ public class Common1Test {
         Thread.sleep(100000);
     }
 
+    @Test
+    public void test3() throws Exception{
+        Class clazz = Common1Test.class.getClassLoader().loadClass("com.berritus.mis.dubbo.api.IFlowService");
+        System.out.println("success");
+    }
 
 }

@@ -6,9 +6,9 @@ package com.berritus.mis.dubbo.api;
  * @Author: Qin Guihe
  * @Create: 2019-06-13 11:48
  */
-public interface IDemoService {
+public interface IMsgSendService{
 
-	void method1();
+	void sendSms(String msg);
 
-	void method2();
+	void sendEmail(String msg);
 }

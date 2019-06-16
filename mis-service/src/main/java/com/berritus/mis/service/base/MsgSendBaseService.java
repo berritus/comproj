@@ -3,13 +3,13 @@ package com.berritus.mis.service.base;
 import com.alibaba.dubbo.common.utils.CollectionUtils;
 import com.berritus.mis.bean.mybatis.SysServiceConfig;
 import com.berritus.mis.dao.SysServiceConfigMapper;
-import com.berritus.mis.dubbo.api.IDemoService;
+import com.berritus.mis.dubbo.api.IFlowService;
+import com.berritus.mis.dubbo.api.IMsgSendService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,33 +21,26 @@ import java.util.List;
  * @Create: 2019-06-13 20:12
  */
 @Component
-public class MsgSendBaseService implements ApplicationContextAware {
+public class MsgSendBaseService extends BaseServiceEngine {
 	private static final Logger logger = LoggerFactory.getLogger(MsgSendBaseService.class);
 
-	private ApplicationContext applicationContext;
 
-	@Autowired
-	private SysServiceConfigMapper sysServiceConfigMapper;
+	public void sendSms(SysServiceConfig sysServiceConfig, String msg) {
+		IMsgSendService taskComponent = getServiceComponent(sysServiceConfig);
 
-
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
+		taskComponent.sendSms(msg);
 	}
 
 
-	public void sender(SysServiceConfig sysServiceConfig) {
-		List<SysServiceConfig> list = sysServiceConfigMapper.selectBySysServiceConfig(sysServiceConfig);
+	public void sendEmail(SysServiceConfig sysServiceConfig, String msg) {
+		IMsgSendService taskComponent = getServiceComponent(sysServiceConfig);
 
-		if (CollectionUtils.isEmpty(list)) {
-			return;
-		}
-
-		SysServiceConfig bean = list.get(0);
-
-		IDemoService taskComponent = (IDemoService) applicationContext.getBean(bean.getComponentName());
-
-		taskComponent.method1();
+		taskComponent.sendEmail(msg);
 	}
 
+	public void method3(SysServiceConfig sysServiceConfig, String msg) {
+		IFlowService taskComponent = getServiceComponent(sysServiceConfig);
+
+		taskComponent.method3();
+	}
 }
