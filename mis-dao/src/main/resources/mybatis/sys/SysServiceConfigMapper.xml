@@ -2,9 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.berritus.mis.dao.SysServiceConfigMapper">
     <resultMap id="BaseResultMap" type="com.berritus.mis.bean.mybatis.SysServiceConfig">
-        <id column="seq_id" property="seqId" jdbcType="BIGINT"/>
+        <id column="uuid" property="uuid" jdbcType="VARCHAR"/>
         <result column="application_code" property="applicationCode" jdbcType="VARCHAR"/>
-        <result column="engine_type" property="engineType" jdbcType="VARCHAR"/>
         <result column="service_interface" property="serviceInterface" jdbcType="VARCHAR"/>
         <result column="component_name" property="componentName" jdbcType="VARCHAR"/>
         <result column="state" property="state" jdbcType="INTEGER"/>
@@ -13,7 +12,7 @@
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    seq_id, application_code, engine_type, service_interface, component_name, state, state_date, crt_date,
+    uuid, application_code, service_interface, component_name, state, state_date, crt_date,
     remark
   </sql>
 
@@ -21,7 +20,7 @@
         select
         <include refid="Base_Column_List"/>
         from sys_service_config
-        where seq_id = #{seqId,jdbcType=BIGINT}
+        where uuid = #{uuid,jdbcType=VARCHAR}
     </select>
 
     <select id="selectBySysServiceConfig" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -29,9 +28,8 @@
         <include refid="Base_Column_List"/>
         from sys_service_config
         <where>
-            <if test="seqId != null">and seq_id = #{seqId,jdbcType=BIGINT}</if>
+            <if test="uuid != null">and uuid = #{uuid,jdbcType=VARCHAR}</if>
             <if test="applicationCode != null">and application_code = #{applicationCode,jdbcType=VARCHAR}</if>
-            <if test="engineType != null">and engine_type = #{engineType,jdbcType=VARCHAR}</if>
             <if test="serviceInterface != null">and service_interface = #{serviceInterface,jdbcType=VARCHAR}</if>
             <if test="componentName != null">and component_name = #{componentName,jdbcType=VARCHAR}</if>
             <if test="state != null">and state = #{state,jdbcType=INTEGER}</if>
@@ -40,14 +38,14 @@
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_service_config
-    where seq_id = #{seqId,jdbcType=BIGINT}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
 
     <insert id="insert" parameterType="com.berritus.mis.bean.mybatis.SysServiceConfig">
-    insert into sys_service_config (seq_id, application_code, engine_type, service_interface,
+    insert into sys_service_config (uuid, application_code, service_interface,
       component_name, state, state_date, 
       crt_date, remark)
-    values (#{seqId,jdbcType=BIGINT}, #{applicationCode,jdbcType=VARCHAR}, #{engineType,jdbcType=VARCHAR},
+    values (#{uuid,jdbcType=VARCHAR}, #{applicationCode,jdbcType=VARCHAR},
     #{serviceInterface,jdbcType=VARCHAR},
       #{componentName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{stateDate,jdbcType=TIMESTAMP}, 
       #{crtDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
@@ -56,14 +54,11 @@
     <insert id="insertSelective" parameterType="com.berritus.mis.bean.mybatis.SysServiceConfig">
         insert into sys_service_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="seqId != null">
-                seq_id,
+            <if test="uuid != null">
+                uuid,
             </if>
             <if test="applicationCode != null">
                 application_code,
-            </if>
-            <if test="engineType != null">
-                engine_type,
             </if>
             <if test="serviceInterface != null">
                 service_interface,
@@ -85,14 +80,11 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="seqId != null">
-                #{seqId,jdbcType=BIGINT},
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
             </if>
             <if test="applicationCode != null">
                 #{applicationCode,jdbcType=VARCHAR},
-            </if>
-            <if test="engineType != null">
-                #{engineType,jdbcType=VARCHAR},
             </if>
             <if test="serviceInterface != null">
                 #{serviceInterface,jdbcType=VARCHAR},
@@ -121,9 +113,6 @@
             <if test="applicationCode != null">
                 application_code = #{applicationCode,jdbcType=VARCHAR},
             </if>
-            <if test="engineType != null">
-                engine_type = #{engineType,jdbcType=VARCHAR},
-            </if>
             <if test="serviceInterface != null">
                 service_interface = #{serviceInterface,jdbcType=VARCHAR},
             </if>
@@ -143,19 +132,18 @@
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
         </set>
-        where seq_id = #{seqId,jdbcType=BIGINT}
+        where uuid = #{uuid,jdbcType=VARCHAR}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.berritus.mis.bean.mybatis.SysServiceConfig">
     update sys_service_config
     set application_code = #{applicationCode,jdbcType=VARCHAR},
-      engine_type = #{engineType,jdbcType=VARCHAR},
       service_interface = #{serviceInterface,jdbcType=VARCHAR},
       component_name = #{componentName,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       state_date = #{stateDate,jdbcType=TIMESTAMP},
       crt_date = #{crtDate,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR}
-    where seq_id = #{seqId,jdbcType=BIGINT}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

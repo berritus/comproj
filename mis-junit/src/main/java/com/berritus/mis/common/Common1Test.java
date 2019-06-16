@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -63,8 +64,13 @@ public class Common1Test {
 
     @Test
     public void test3() throws Exception{
-        Class clazz = Common1Test.class.getClassLoader().loadClass("com.berritus.mis.dubbo.api.IFlowService");
-        System.out.println("success");
+        //Class clazz = Common1Test.class.getClassLoader().loadClass("com.berritus.mis.dubbo.api.IFlowService");
+        //System.out.println("success");
+
+        String uuid = UUID.randomUUID().toString();
+        System.out.println(uuid);
     }
+
+
 
 }

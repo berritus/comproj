@@ -3,6 +3,7 @@ package com.berritus.mis.service.base;
 import com.alibaba.dubbo.common.utils.CollectionUtils;
 import com.berritus.mis.bean.mybatis.SysServiceConfig;
 import com.berritus.mis.dao.SysServiceConfigMapper;
+import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.dubbo.api.IFlowService;
 import com.berritus.mis.dubbo.api.IMsgSendService;
 import org.slf4j.Logger;
@@ -42,5 +43,11 @@ public class MsgSendBaseService extends BaseServiceEngine {
 		IFlowService taskComponent = getServiceComponent(sysServiceConfig);
 
 		taskComponent.method3();
+	}
+
+	public void helloDubbo(SysServiceConfig sysServiceConfig, String msg) {
+		DubboDemoService taskComponent = getServiceComponent(sysServiceConfig);
+
+		taskComponent.helloDubbo();
 	}
 }

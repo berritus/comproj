@@ -7,11 +7,9 @@ import java.util.Date;
 public class SysServiceConfig extends MisBean {
     private static final long serialVersionUID = -4178159118785601911L;
 
-    private Long seqId;
+    private String uuid;
 
     private String applicationCode;
-
-    private String engineType;
 
     private String serviceInterface;
 
@@ -25,12 +23,12 @@ public class SysServiceConfig extends MisBean {
 
     private String remark;
 
-    public Long getSeqId() {
-        return seqId;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setSeqId(Long seqId) {
-        this.seqId = seqId;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getApplicationCode() {
@@ -83,14 +81,6 @@ public class SysServiceConfig extends MisBean {
 
     public String getRemark() {
         return remark;
-    }
-
-    public String getEngineType() {
-        return engineType;
-    }
-
-    public void setEngineType(String engineType) {
-        this.engineType = engineType;
     }
 
     public void setRemark(String remark) {

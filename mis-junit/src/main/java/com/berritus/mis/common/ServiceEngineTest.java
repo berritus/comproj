@@ -31,8 +31,7 @@ public class ServiceEngineTest {
 	@Test
 	public void test1() {
 		SysServiceConfig sysServiceConfig = new SysServiceConfig();
-		sysServiceConfig.setEngineType("msgSender");
-		sysServiceConfig.setServiceInterface("IMsgSendService");
+		sysServiceConfig.setServiceInterface("com.berritus.mis.dubbo.api.IMsgSendService");
 		sysServiceConfig.setApplicationCode("mis-521");
 		msgSendBaseService.sendEmail(sysServiceConfig, "hello");
 		System.out.println("success");
@@ -41,10 +40,11 @@ public class ServiceEngineTest {
 	@Test
 	public void test2() {
 		SysServiceConfig sysServiceConfig = new SysServiceConfig();
-		sysServiceConfig.setEngineType("msgSender");
-		sysServiceConfig.setServiceInterface("com.berritus.mis.dubbo.api.IFlowService");
+		sysServiceConfig.setServiceInterface("com.berritus.mis.dubbo.api.DubboDemoService");
 		sysServiceConfig.setApplicationCode("mis-521");
-		msgSendBaseService.method3(sysServiceConfig, "hello");
+		msgSendBaseService.helloDubbo(sysServiceConfig, "hello");
 		System.out.println("success");
 	}
+
+
 }

@@ -24,10 +24,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * @Author: Qin Guihe
  * @Date: 2019/6/15
  */
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(classes = MisApplication.class)
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = MisApplication.class)
+@RunWith(SpringRunner.class) // @RunWith(SpringRunner.class): 告诉Junit运行使用Spring 的单元测试支持,
+// SpringRunner是SpringJunit4ClassRunner新的名称，只是视觉上看起来更简单了
+@SpringBootTest(classes = MisApplication.class)//@SpringBootTest : 该注解可以在一个测试类指定运行Spring Boot为基础的测试
 public class GetBeanFromSpring {
 
     /**
