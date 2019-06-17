@@ -64,11 +64,14 @@ public class Common1Test {
 
     @Test
     public void test3() throws Exception{
-        //Class clazz = Common1Test.class.getClassLoader().loadClass("com.berritus.mis.dubbo.api.IFlowService");
-        //System.out.println("success");
+        Class clazz = Common1Test.class.getClassLoader()
+                .loadClass("com.berritus.mis.dubbo.api.IMsgSendService");
+        System.out.println(clazz);
 
-        String uuid = UUID.randomUUID().toString();
-        System.out.println(uuid);
+        //clazz.getInterfaces();
+        System.out.println(clazz.getInterfaces());
+        //String uuid = UUID.randomUUID().toString();
+        //System.out.println(uuid);
     }
 
 

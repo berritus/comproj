@@ -34,9 +34,17 @@ public class MsgSendBaseService extends BaseServiceEngine {
 
 
 	public void sendEmail(SysServiceConfig sysServiceConfig, String msg) {
-		IMsgSendService taskComponent = getServiceComponent(sysServiceConfig);
+		try {
+			Class clazz = BaseServiceEngine.class.getClassLoader()
+					.loadClass("com.berritus.mis.dubbo.api.IMsgSendService");
 
-		taskComponent.sendEmail(msg);
+			clazz.getInterfaces();
+			IMsgSendService component = getServiceComponent(sysServiceConfig);
+
+			component.sendEmail(msg);
+		} catch (Exception e) {
+
+		}
 	}
 
 	public void method3(SysServiceConfig sysServiceConfig, String msg) {
