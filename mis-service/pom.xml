@@ -39,6 +39,10 @@
             <groupId>com.dianping.cat</groupId>
             <artifactId>cat-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.berritus.core</groupId>
+            <artifactId>mis-core-component</artifactId>
+        </dependency>
     </dependencies>
 
 

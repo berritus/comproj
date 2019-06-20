@@ -4,7 +4,7 @@ package com.berritus.mis.controller;
 import com.berritus.mis.bean.mybatis.SysFiles;
 import com.berritus.mis.bean.school.TbStudent;
 import com.berritus.mis.bean.security.TbSysUser;
-import com.berritus.mis.core.cache.redis.RedisService;
+import com.berritus.mis.core.cache.redis.IRedisService;
 import com.berritus.mis.core.component.annotation.MisLogger;
 import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.dubbo.api.SecurityService;
@@ -31,7 +31,7 @@ public class BlockController {
     @Autowired
     private DubboDemoService dubboDemoService;
     @Autowired
-    private RedisService redisService;
+    private IRedisService redisService;
     @Autowired
     private SecurityService securityService;
     @Autowired

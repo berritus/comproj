@@ -3,7 +3,7 @@ package com.berritus.mis.common;
 import com.berritus.mis.bean.mybatis.MisOrder;
 import com.berritus.mis.bean.mybatis.SysFiles;
 import com.berritus.mis.controller.conf.MisApplication;
-import com.berritus.mis.core.cache.redis.RedisService;
+import com.berritus.mis.core.cache.redis.IRedisService;
 import com.berritus.mis.dubbo.api.OrderService;
 import com.berritus.mis.dubbo.api.QrySysService;
 import com.berritus.mis.dubbo.api.SysService;
@@ -46,7 +46,7 @@ public class HighTest {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private RedisService redisService;
+    private IRedisService redisService;
 
     private class ThreadTest implements Runnable{
         @Override

@@ -3,7 +3,7 @@ package com.berritus.mis.service.impl;
 import com.berritus.mis.bean.mybatis.MisOrder;
 import com.berritus.mis.bean.mybatis.MisProdDef;
 import com.berritus.mis.core.cache.lock.RedisLock;
-import com.berritus.mis.core.cache.redis.RedisService;
+import com.berritus.mis.core.cache.redis.IRedisService;
 import com.berritus.mis.dao.MisOrderMapper;
 import com.berritus.mis.dao.MisProdDefMapper;
 import com.berritus.mis.dubbo.api.OrderService;
@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private QryOrderService qryOrderService;
     @Autowired
-    private RedisService redisService;
+    private IRedisService redisService;
     @Autowired
     private RedisLock redisLock;
 
