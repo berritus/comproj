@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
@@ -74,6 +75,18 @@ public class Common1Test {
         //System.out.println(uuid);
     }
 
+    @Test
+    public void test4() {
+        String str = "(abc)";
+        str = str.replaceAll("\\(", "");
+        str = str.replaceAll("\\)", "");
+        System.out.println(str);
+    }
 
-
+    @Test
+    public void test5() {
+        Random random = new Random();
+        int age = random.nextInt(3);
+        System.out.println(age);
+    }
 }
