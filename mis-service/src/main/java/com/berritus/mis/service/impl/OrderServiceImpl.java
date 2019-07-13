@@ -2,7 +2,7 @@ package com.berritus.mis.service.impl;
 
 import com.berritus.mis.bean.mybatis.MisOrder;
 import com.berritus.mis.bean.mybatis.MisProdDef;
-import com.berritus.mis.core.cache.lock.RedisLock;
+import com.berritus.mis.core.cache.lock.IRedisLock;
 import com.berritus.mis.core.cache.redis.IRedisService;
 import com.berritus.mis.dao.MisOrderMapper;
 import com.berritus.mis.dao.MisProdDefMapper;
@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private IRedisService redisService;
     @Autowired
-    private RedisLock redisLock;
+    private IRedisLock redisLock;
 
     @Override
     public String genOrderCode(int prodId) {

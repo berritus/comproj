@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Service("myUserDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
-    private static Logger logger = LoggerFactory.getLogger(MyUserDetailsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(MyUserDetailsService.class);
 
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
