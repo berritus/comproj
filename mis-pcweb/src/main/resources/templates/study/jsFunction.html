@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="gbk">
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title - 1</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/js/base/jquery/jquery-3.4.1.min.js}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                alert("Text: " + $("#test").text());
+            });
+            $("#btn2").click(function(){
+                alert("HTML: " + $("#test").html());
+            });
+        });
+    </script>
+</head>
+<body>
+<h2 th:text="${message}"></h2>
+<p id="test">这是段落中的<b>粗体</b>文本。</p>
+<button id="btn1">显示文本</button>
+<button id="btn2">显示 HTML</button>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">
+                    <span class="panel-title">公司信息</span>
+                </div>
+                <div class="panel-body">
+                    公司链接：www.it.com</span><br/>
+                    公司名称：郭德纲的观点</span><br/>
+                    公司代码：00370.hk</span><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

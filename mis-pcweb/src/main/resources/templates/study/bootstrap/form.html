@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="gbk">
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title - 1</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/js/base/jquery/jquery-3.4.1.min.js}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#submitData").click(function(){
+                $.ajax({
+                    url: "/student/add",
+                    data: JSON.stringify(getFormData("form1")),
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.result.successful){
+                            alert("ok");
+                        }else{
+                            alert("failed，" + data.result.msg);
+                        }
+                    },
+                    error: function () {
+                        alert("failed");
+                    }
+                });
+            });
+        });
+
+        function getFormData(frm) {
+            var obj = $("#" + frm).serializeArray();
+            var jsonObj = {};
+
+            $.each(obj, function() {
+                if (jsonObj[this.name] !== undefined) {
+                    if (!jsonObj[this.name].push) {
+                        jsonObj[this.name] = [ jsonObj[this.name] ];
+                    }
+                    jsonObj[this.name].push(this.value || '');
+                } else {
+                    jsonObj[this.name] = this.value || '';
+                }
+            });
+
+            return jsonObj;
+        }
+    </script>
+</head>
+<body>
+
+
+<form class="form-horizontal" role="form" id="form1">
+    <div class="form-group">
+        <label for="stuName" class="col-sm-2 control-label">名字</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="stuName" name="stuName" placeholder="请输入名字">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="age" class="col-sm-2 control-label">年龄</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="age" name="age" placeholder="请输入年龄">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-default" id="submitData">提交</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>

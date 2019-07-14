@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="gbk">
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加系统参数</title>
+    <link th:href="@{/layui-v2.5.4/layui/css/layui.css}" rel="stylesheet" type="text/css"/>
+
+    <script th:src="@{/layui-v2.5.4/layui/layui.js}" type="text/javascript"></script>
+    <script th:src="@{/js/base/common/common.js}" type="text/javascript"></script>
+    <script th:src="@{/js/base/jquery/jquery-3.4.1.min.js}" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#submitData").click(function(){
+                $.ajax({
+                    url: "http://localhost:8109/sys/insertSysParam",
+                    data: JSON.stringify(getFormData("form1")),
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.result.successful){
+                            alert("ok");
+                        }else{
+                            alert("failed，" + data.result.msg);
+                        }
+                    },
+                    error: function () {
+                        alert("failed");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+
+<form class="layui-form" id="form1">
+    <div class="layui-form-item">
+        <label class="layui-form-label">参数名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="paramName" lay-verify="required" lay-reqtext="参数名称是必填项，不能为空"
+                   autocomplete="off" placeholder="请输入参数名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">参数编码</label>
+        <div class="layui-input-block">
+            <input type="text" name="paramCode" lay-verify="required" lay-reqtext="参数编码是必填项，不能为空"
+                   autocomplete="off" placeholder="请输入参数编码" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">参数值</label>
+        <div class="layui-input-block">
+            <input type="text" name="paramValue" lay-verify="required" lay-reqtext="参数值是必填项，不能为空"
+                   autocomplete="off" placeholder="请输入参数值" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">参数备注</label>
+        <div class="layui-input-block">
+            <input type="text" name="remark"
+                   autocomplete="off" placeholder="请输入参数备注" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" id="submitData" class="layui-btn" lay-filter="demo1">立即提交</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>

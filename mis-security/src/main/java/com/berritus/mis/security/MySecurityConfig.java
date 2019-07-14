@@ -109,6 +109,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         //解决静态资源被拦截的问题
         //Spring boot的默认静态资源放置位置是在resource/static下
-        web.ignoring().antMatchers("/bootstrap/**", "/favicon.ico");
+        web.ignoring().antMatchers("/bootstrap/**", "/favicon.ico", "/js/**", "js/**");
     }
 }

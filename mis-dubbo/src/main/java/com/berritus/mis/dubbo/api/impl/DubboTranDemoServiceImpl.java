@@ -33,7 +33,7 @@ public class DubboTranDemoServiceImpl implements DubboDemoService {
     @Override
     public TbStudent addStudent(TbStudent student) {
         studentMapper.insert(student);
-        throw new RuntimeException("错误啦");
-        //return student;
+        //throw new RuntimeException("错误啦");
+        return student;
     }
 }
