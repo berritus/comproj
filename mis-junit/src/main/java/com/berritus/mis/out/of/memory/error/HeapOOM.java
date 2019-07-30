@@ -1,5 +1,7 @@
 package com.berritus.mis.out.of.memory.error;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +20,19 @@ public class HeapOOM {
     }
 
     public static void main(String[] args) {
-        List<OOMObject> list = new ArrayList<OOMObject>();
+        // 1
+//        List<OOMObject> list = new ArrayList<>();
+//        while(true){
+//            list.add(new OOMObject());
+//        }
+
+        // 2
+        List<StudentDTO> list = new ArrayList<>();
         while(true){
-            list.add(new OOMObject());
+            list.add(new StudentDTO("stu1", "hello", 23));
         }
     }
+
+
 }
 

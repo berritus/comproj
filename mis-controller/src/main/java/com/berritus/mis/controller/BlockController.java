@@ -15,10 +15,7 @@ import com.dianping.cat.message.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -95,4 +92,21 @@ public class BlockController {
     }
 
 
+    // VM Args: -Xms10m -Xmx10m -XX:+HeapDumpOnOutOfMemoryError
+    // http://localhost:8081/testCatThreadOOM
+    @GetMapping("/testCatThreadOOM")
+    public void testCatThreadOOM() {
+        int n = 0;
+        while(true) {
+            n++;
+            try {
+                Transaction t = Cat.newTransaction("/testCatThreadOOM", "redisService.set");
+                int i = 1 /0;
+                //t.setStatus(Transaction.SUCCESS);
+                //t.complete();
+            } catch (Exception e) {
+                System.out.println("n = " + n + e);
+            }
+        }
+    }
 }

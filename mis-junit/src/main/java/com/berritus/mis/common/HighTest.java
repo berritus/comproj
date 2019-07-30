@@ -36,7 +36,7 @@ import java.util.concurrent.Executors;
 public class HighTest {
     @Autowired
     private QrySysService qrySysService;
-    private final int MAX_COUNT = 1;
+    private final int MAX_COUNT = 10;
     private CountDownLatch countDownLatch = new CountDownLatch(1);
     @Autowired
     @Qualifier("sysService")
@@ -68,8 +68,8 @@ public class HighTest {
             System.out.println(Thread.currentThread().getName() + " do task");
             SysFiles bean = new SysFiles();
             bean.setFileId(1000004);
-            SysFiles sysFiles = qrySysService.qrySysFiles2(bean);
-            System.out.println(sysFiles.getMongoFileId());
+            //SysFiles sysFiles = qrySysService.qrySysFiles2(bean);
+            //System.out.println(sysFiles.getMongoFileId());
         }
     }
 
@@ -106,10 +106,11 @@ public class HighTest {
 //                e.printStackTrace();
 //            }
 
+            System.out.println(Thread.currentThread().getName());
             MisOrder order = new MisOrder();
             order.setCustId((int)Thread.currentThread().getId());
             order.setProdId(10000);
-            orderService.insertMisOrder2(order);
+            //orderService.insertMisOrder2(order);
 //            String orderCode = orderService.genOrderCode();
 //            System.out.println(orderCode);
 //            try {
@@ -155,8 +156,9 @@ public class HighTest {
     @Test
     public void test5() throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(50);
-        ThreadOrder threadOrder = new ThreadOrder();
-        for (int i = 0; i < 300; i++){
+
+        for (int i = 0; i < 100; i++){
+            ThreadOrder threadOrder = new ThreadOrder();
             executorService.submit(threadOrder);
         }
 

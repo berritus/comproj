@@ -36,4 +36,8 @@ public class DubboTranDemoServiceImpl implements DubboDemoService {
         //throw new RuntimeException("错误啦");
         return student;
     }
+
+    public static void main(String[] args) {
+        System.out.println("hello world");
+    }
 }
