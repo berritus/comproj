@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class BlockController {
-    private Logger logger = LoggerFactory.getLogger(BlockController.class);
+    private static final Logger logger = LoggerFactory.getLogger(BlockController.class);
 
     @Autowired
     private DubboDemoService dubboDemoService;
@@ -59,9 +59,11 @@ public class BlockController {
         return dubboDemoService.helloDubbo() + ",sessionId = " + sessionId;
     }
 
+    // http://localhost:8081/index
     @MisLogger
     @RequestMapping("/index")
     public String index(){
+        logger.info("index");
         return "index";
     }
 
