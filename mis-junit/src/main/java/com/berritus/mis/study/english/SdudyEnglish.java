@@ -10,10 +10,38 @@ import java.util.List;
 public class SdudyEnglish {
     @Test
     public void test1() {
-        String pathFile = "F:\\spring-proj\\字幕\\狂暴巨兽.ass";
+        String pathFile = "F:\\spring-proj\\字幕\\12.txt";
         File file = new File(pathFile);
         String fileEncode = getCode(pathFile);
-        readFile(file, "F:\\spring-proj\\字幕\\狂暴巨兽.txt", fileEncode);
+        readFileTo(file, "F:\\spring-proj\\字幕\\123.txt", fileEncode);
+    }
+
+    public void readFileTo(File infile, String outfile, String fileEncode) {
+        try {
+            String encoding = fileEncode;
+            if(StringUtils.isEmpty(fileEncode)){
+                encoding = "GBK";
+            }
+
+            if (infile.isFile() && infile.exists()) {
+                InputStreamReader read = new InputStreamReader(new FileInputStream(infile),
+                        encoding);//考虑到编码格式
+                BufferedReader bufferedReader = new BufferedReader(read);
+
+                String lineTxt = null;
+                FileWriter fw = new FileWriter(outfile, true);
+                String str = "";
+                while ((lineTxt = bufferedReader.readLine()) != null) {
+                    str = "delete from " + lineTxt + " where APPLICATION_CODE = 'MD_TEST2_OA';";
+                    str = str + "\n";
+                    fw.write(str);
+                }
+                fw.flush();
+                read.close();
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     public void readFile(File infile, String outfile, String fileEncode) {

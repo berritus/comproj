@@ -248,4 +248,63 @@ public class HighTest {
         long times = System.currentTimeMillis();
         System.out.println(times);
     }
+
+    private void testSync0(){
+        SysFiles bean = new SysFiles();
+        bean.setFileId(1000004);
+        SysFiles bean2 = null;
+        try {
+            bean2 = (SysFiles)redisService.get(bean.getFileId() + "");
+            if (bean2 == null) {
+                synchronized (this) {
+                    bean2 = (SysFiles)redisService.get(bean.getFileId() + "");
+                    if (bean2 == null) {
+                        bean = qrySysService.qrySysFiles2(bean);
+                        if (bean != null) {
+                            redisService.set(bean.getFileId() + "", bean, (long)30);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    @Test
+    public void testSync() throws InterruptedException {
+        long t1 = System.currentTimeMillis();
+        long t2 = System.currentTimeMillis();
+        CountDownLatch countDownLatch = new CountDownLatch(500);
+
+        for (int i = 0; i < 500; i++) {
+            TestSync testSync = new TestSync(countDownLatch);
+            new Thread(testSync).start();
+        }
+
+        countDownLatch.await();
+        t2 = System.currentTimeMillis();
+
+        System.out.println("======================== times={}" + (t2 - t1));
+    }
+    class TestSync implements Runnable {
+
+        private CountDownLatch countDownLatch;
+
+        public TestSync(CountDownLatch countDownLatch) {
+            this.countDownLatch = countDownLatch;
+        }
+
+        @Override
+        public void run() {
+            try {
+                System.out.println("==========thread id = " + Thread.currentThread().getId());
+                testSync0();
+                countDownLatch.countDown();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -89,4 +89,5 @@ public class Common1Test {
         int age = random.nextInt(3);
         System.out.println(age);
     }
+
 }

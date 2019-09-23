@@ -48,7 +48,7 @@ public class QrySysServiceImpl implements QrySysService {
 
     //@MisCache(key=NORMAL_KEY + " + '{seqId:' + #args[0] + ',cityId:' + #args[1] + '}'")
     @Override
-    @MisCache(key = "'fileId' + #args[0]", index = 0)
+    // @MisCache(key = "'fileId' + #args[0]", index = 0)
     public SysFiles qrySysFiles2(SysFiles bean) {
         SysFiles sysFiles = sysFilesMapper.selectByPrimaryKey(bean.getFileId());
         return sysFiles;
@@ -63,4 +63,6 @@ public class QrySysServiceImpl implements QrySysService {
         bean.setState("S0A");
         return sysFiles;
     }
+
+
 }
