@@ -41,14 +41,15 @@ public class BlockController {
         Transaction t = Cat.newTransaction("/mis", "redisService.set");
         String sessionId = "";
         try{
-            Cat.logEvent("helloDubbo", "redisService.set", Event.SUCCESS, "ip=${serverIp}");
-            Cat.logMetricForCount("metric.key");
-            Cat.logMetricForDuration("metric.key", 5);
+            //Cat.logEvent("helloDubbo", "redisService.set", Event.SUCCESS, "ip=${serverIp}");
+            //Cat.logMetricForCount("metric.key");
+            //Cat.logMetricForDuration("metric.key", 5);
 
             sessionId = request.getSession().getId();
             redisService.set("sessionId", sessionId, (long)90);
             logger.warn("helloDubbo");
             t.setStatus(Transaction.SUCCESS);
+
         }catch (Exception e){
             t.setStatus(e);
             Cat.logError(e);
