@@ -23,6 +23,7 @@
         <module>../mis-dubbo-api</module>
         <module>../mis-task</module>
         <module>../mis-junit</module>
+        <module>../mis-rabbitmq</module>
     </modules>
     <packaging>pom</packaging>
 

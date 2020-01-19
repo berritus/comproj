@@ -278,6 +278,9 @@
 	<logger name="com.berritus.mis.service" level="WARN" additivity="false">
 		<appender-ref ref="SERVICE_APPENDER" />
 	</logger>
+	<logger name="com.berritus.mis.rabbitmq" level="WARN" additivity="false">
+		<appender-ref ref="SERVICE_APPENDER" />
+	</logger>
 	<logger name="com.berritus.mis.controller" level="WARN" additivity="false">
 		<appender-ref ref="CONTROLLER_APPENDER" />
 	</logger>

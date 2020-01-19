@@ -22,6 +22,11 @@
     <dependencies>
         <dependency>
             <groupId>com.berritus.mis</groupId>
+            <artifactId>mis-rabbitmq</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.berritus.mis</groupId>
             <artifactId>mis-dao</artifactId>
             <version>${module.version}</version>
         </dependency>

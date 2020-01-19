@@ -9,6 +9,7 @@ import com.berritus.mis.core.component.annotation.MisLogger;
 import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.dubbo.api.SecurityService;
 import com.berritus.mis.dubbo.api.SysService;
+import com.berritus.mis.service.MessageService;
 import com.dianping.cat.Cat;
 import com.dianping.cat.message.Event;
 import com.dianping.cat.message.Transaction;
@@ -33,6 +34,8 @@ public class BlockController {
     private SecurityService securityService;
     @Autowired
     private SysService sysService;
+    @Autowired
+    private MessageService messageService;
 
     // http://localhost:8081/mis
     @MisLogger
@@ -94,6 +97,14 @@ public class BlockController {
         return sysService.insertSysFiles(record);
     }
 
+
+    // http://localhost:8081/rabbitmq
+    @MisLogger
+    @RequestMapping("/rabbitmq")
+    public String rabbitmq(){
+        messageService.sendConfirmMsg("rabbitmq");
+        return "rabbitmq";
+    }
 
     // VM Args: -Xms10m -Xmx10m -XX:+HeapDumpOnOutOfMemoryError
     // http://localhost:8081/testCatThreadOOM

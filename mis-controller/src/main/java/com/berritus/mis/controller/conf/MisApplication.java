@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan({"com.berritus.mis.dao"})
 @ComponentScan({"com.berritus.mis.controller", "com.berritus.mis.dao",
         "com.berritus.mis.service", "com.berritus.mis.query", "com.berritus.mis.dubbo",
-        "com.berritus.mis.task"})
+        "com.berritus.mis.task", "com.berritus.mis.rabbitmq"})
 @SpringBootApplication
 @EnableTransactionManagement
 @ServletComponentScan({"com.berritus.mis.controller.conf"})
