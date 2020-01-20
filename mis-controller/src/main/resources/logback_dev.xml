@@ -275,25 +275,25 @@
 		</rollingPolicy>
 	</appender>
 	<!--  -->
-	<logger name="com.berritus.mis.service" level="WARN" additivity="false">
+	<logger name="com.berritus.mis.service" level="INFO" additivity="false">
 		<appender-ref ref="SERVICE_APPENDER" />
 	</logger>
-	<logger name="com.berritus.mis.rabbitmq" level="WARN" additivity="false">
+	<logger name="com.berritus.mis.rabbitmq" level="INFO" additivity="false">
 		<appender-ref ref="SERVICE_APPENDER" />
 	</logger>
-	<logger name="com.berritus.mis.controller" level="WARN" additivity="false">
+	<logger name="com.berritus.mis.controller" level="INFO" additivity="false">
 		<appender-ref ref="CONTROLLER_APPENDER" />
 	</logger>
-	<logger name="com.berritus.mis.task" level="WARN" additivity="false">
+	<logger name="com.berritus.mis.task" level="INFO" additivity="false">
 		<appender-ref ref="TASK_APPENDER" />
 	</logger>
-	<logger name="com.berritus.mis.query" level="WARN" additivity="false">
+	<logger name="com.berritus.mis.query" level="INFO" additivity="false">
 		<appender-ref ref="QUERY_APPENDER" />
 	</logger>
-	<logger name="com.berritus.mis.dubbo" level="WARN" additivity="false">
+	<logger name="com.berritus.mis.dubbo" level="INFO" additivity="false">
 		<appender-ref ref="DUBBO_APPENDER" />
 	</logger>
-	<logger name="com.berritus.mis.common" level="WARN" additivity="false">
+	<logger name="com.berritus.mis.common" level="INFO" additivity="false">
 		<appender-ref ref="COMMON_APPENDER" />
 	</logger>
 	<!--core-->
@@ -314,6 +314,10 @@
 	</logger>
 	<logger name="com.berritus.mis.core.component" level="DEBUG" additivity="false">
 		<appender-ref ref="CORE_COMPONENT_APPENDER" />
+	</logger>
+
+	<logger name="com.berritus.mis" level="INFO" additivity="false">
+		<appender-ref ref="CONSOLE" />
 	</logger>
 
 	<!-- mybatis 打印sql -->

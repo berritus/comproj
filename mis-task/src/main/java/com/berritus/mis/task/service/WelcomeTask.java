@@ -1,8 +1,10 @@
 package com.berritus.mis.task.service;
 
 import com.berritus.mis.core.task.MisTaskComponent;
+import com.berritus.mis.core.task.service.QryTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ import java.util.List;
 @Component("task.WelcomeTask")
 public class WelcomeTask extends MisTaskComponent<String> {
 	private Logger logger = LoggerFactory.getLogger(WelcomeTask.class);
-	
+//	@Autowired
+//	private QryTaskService qryTaskService;
+
 	@Override
 	public List<String> getTask(){
 		List<String> list = new ArrayList<String>();

@@ -2,7 +2,6 @@ package com.berritus.mis.common;
 
 import com.berritus.mis.core.component.SpringContextSupport;
 import com.berritus.mis.core.component.SpringContextUtil;
-import com.berritus.mis.core.component.SpringContextWebSupport;
 import com.berritus.mis.bean.mybatis.SysFiles;
 import com.berritus.mis.controller.conf.MisApplication;
 import com.berritus.mis.dubbo.api.QrySysService;
@@ -84,17 +83,17 @@ public class GetBeanFromSpring {
         System.out.println(sysFiles.getMongoFileId());
     }
 
-    @Autowired
-    private SpringContextWebSupport springContextWebSupport;
+//    @Autowired
+//    private SpringContextWebSupport springContextWebSupport;
 
     @Test
     public void method5() {
-        QrySysService qrySysService = (QrySysService) springContextWebSupport.getBean(QrySysService.class);
-
-        SysFiles bean = new SysFiles();
-        bean.setFileId(1000004);
-        SysFiles sysFiles = qrySysService.qrySysFiles2(bean);
-        System.out.println(sysFiles.getMongoFileId());
+//        QrySysService qrySysService = (QrySysService) springContextWebSupport.getBean(QrySysService.class);
+//
+//        SysFiles bean = new SysFiles();
+//        bean.setFileId(1000004);
+//        SysFiles sysFiles = qrySysService.qrySysFiles2(bean);
+//        System.out.println(sysFiles.getMongoFileId());
     }
 
     /**

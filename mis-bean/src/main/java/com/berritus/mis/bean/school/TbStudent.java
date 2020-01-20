@@ -34,4 +34,13 @@ public class TbStudent extends MisBean {
     public void setStuName(String stuName) {
         this.stuName = stuName == null ? null : stuName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TbStudent{" +
+                "id=" + id +
+                ", age=" + age +
+                ", stuName='" + stuName + '\'' +
+                '}';
+    }
 }

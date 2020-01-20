@@ -20,11 +20,13 @@
     </properties>
 
     <dependencies>
+        <!--
         <dependency>
             <groupId>com.berritus.mis</groupId>
             <artifactId>mis-rabbitmq</artifactId>
             <version>${module.version}</version>
         </dependency>
+        -->
         <dependency>
             <groupId>com.berritus.mis</groupId>
             <artifactId>mis-dao</artifactId>
@@ -47,6 +49,10 @@
         <dependency>
             <groupId>com.berritus.core</groupId>
             <artifactId>mis-core-component</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.berritus.core</groupId>
+            <artifactId>mis-core-rabbitmq</artifactId>
         </dependency>
     </dependencies>
 

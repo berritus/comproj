@@ -102,7 +102,8 @@ public class BlockController {
     @MisLogger
     @RequestMapping("/rabbitmq")
     public String rabbitmq(){
-        messageService.sendConfirmMsg("rabbitmq");
+        // messageService.sendConfirmMsg("rabbitmq");
+        messageService.sendMsgTest();
         return "rabbitmq";
     }
 
