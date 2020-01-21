@@ -24,7 +24,7 @@ public class GeneratorMybatisMap {
 
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
-		File configFile = new File("E:\\md-proj\\data_exchange_center\\dec_provider\\dec-generator\\src\\main\\resources\\generatorConfig.xml");
+		File configFile = new File("E:\\com-proj\\comproj\\mis-generator\\src\\main\\resources\\generatorConfig.xml");
 		ConfigurationParser cp = new ConfigurationParser(warnings);
 		Configuration config = cp.parseConfiguration(configFile);
 		DefaultShellCallback callback = new DefaultShellCallback(overwrite);

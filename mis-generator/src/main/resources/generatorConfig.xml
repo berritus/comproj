@@ -54,13 +54,13 @@
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
         <!-- 此处是将UserMapper.xml改名为UserDao.xml 当然 想改成什么都行~-->
-        <plugin type="com.minstone.core.dao.mybatis.plugins.RenameSqlMapperPlugin">
+        <plugin type="com.berritus.mis.core.dao.mybatis.plugins.RenameSqlMapperPlugin">
             <property name="searchString" value="DTOMapper" />
             <property name="replaceString" value="Dao" />
         </plugin>
 
         <!-- 此处是将UserMapper改名为UserDao 接口 当然 想改成什么都行~  -->
-        <plugin type="com.minstone.core.dao.mybatis.plugins.RenameJavaMapperPlugin">
+        <plugin type="com.berritus.mis.core.dao.mybatis.plugins.RenameJavaMapperPlugin">
             <property name="searchString" value="DTOMapper$" />
             <property name="replaceString" value="Dao" />
         </plugin>
@@ -103,8 +103,8 @@
             targetPackage:生成的类要放的包,真实的包受enableSubPackages属性控制
             targetProject:目标项目,指定一个存在的目录下,生成的内容会放到指定目录中,如果目录不存在,MBG不会自动建目录
         -->
-        <javaModelGenerator targetPackage="com.minstone.dec.bean.demo"
-                            targetProject="E:\md-proj\data_exchange_center\dec_provider\dec-bean\src\main\java">
+        <javaModelGenerator targetPackage="com.berritus.mis.bean.demo"
+                            targetProject="E:\com-proj\comproj\mis-bean\src\main\java">
 
             <!-- 自动为每一个生成的类创建一个构造方法,构造方法包含了所有的field,而不是使用setter -->
             <!--<property name="constructorBased" value="false"/>-->
@@ -138,7 +138,7 @@
             targetPackage/targetProject:同javaModelGenerator
         -->
         <sqlMapGenerator targetPackage="mybatis.demo"
-                         targetProject="E:\md-proj\data_exchange_center\dec_provider\dec-dao\src\main\resources">
+                         targetProject="E:\com-proj\comproj\mis-dao\src\main\resources">
             <!-- 在targetPackage的基础上,根据数据库的schema再生成一层package,最终生成的类放在这个package下,默认为false -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -153,8 +153,8 @@
             3. XMLMAPPER:会生成Mapper接口,接口完全依赖XML
             注意,如果context是MyBatis3Simple:只支持ANNOTATEDMAPPER和XMLMAPPER
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.minstone.dec.dao.demo"
-                             targetProject="E:\md-proj\data_exchange_center\dec_provider\dec-dao\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.berritus.mis.dao.demo"
+                             targetProject="E:\com-proj\comproj\mis-dao\src\main\java">
             <!-- 在targetPackage的基础上,根据数据库的schema再生成一层package,最终生成的类放在这个package下,默认为false -->
             <property name="enableSubPackages" value="false"/>
 
@@ -203,7 +203,7 @@
 
             注意,table里面很多参数都是对javaModelGenerator,context等元素的默认属性的一个复写
         -->
-        <table tableName="tb_sys_product" domainObjectName="SysProductDTO"
+        <table tableName="mq_message_info" domainObjectName="MqMessageInfoDTO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

@@ -24,6 +24,7 @@
         <module>../mis-task</module>
         <module>../mis-junit</module>
         <module>../mis-rabbitmq</module>
+        <module>../mis-generator</module>
     </modules>
     <packaging>pom</packaging>
 
