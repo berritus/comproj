@@ -107,6 +107,14 @@ public class BlockController {
         return "rabbitmq";
     }
 
+    // http://localhost:8081/dynamicTest
+    @MisLogger
+    @RequestMapping("/dynamicTest")
+    public String dynamicTest(){
+        messageService.dynamicTest();
+        return "dynamicTest";
+    }
+
     // VM Args: -Xms10m -Xmx10m -XX:+HeapDumpOnOutOfMemoryError
     // http://localhost:8081/testCatThreadOOM
     @GetMapping("/testCatThreadOOM")

@@ -26,6 +26,12 @@
             <artifactId>mis-rabbitmq</artifactId>
             <version>${module.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.berritus.test</groupId>
+            <artifactId>test-rabbitmq</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         -->
         <dependency>
             <groupId>com.berritus.mis</groupId>
@@ -53,6 +59,10 @@
         <dependency>
             <groupId>com.berritus.core</groupId>
             <artifactId>mis-core-rabbitmq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.berritus.core</groupId>
+            <artifactId>mis-core-dynamicdb</artifactId>
         </dependency>
     </dependencies>
 
