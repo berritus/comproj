@@ -91,25 +91,25 @@ public class DynamicDataSourceAop {
 //			DataSourceUtils.changeDataSource(dbCode.toUpperCase());
 //		}
 
-		String applicationCode = "MIS_TEST_DB";
-		String cacheKey = DATABASE_CACHE + applicationCode.toUpperCase();
-		DataSourceInfo dataSourceInfo = redisService.get(cacheKey);
-		if (dataSourceInfo == null) {
-			dataSourceInfo = new DataSourceInfo();
-			dataSourceInfo.setApplicationCode(applicationCode);
-			dataSourceInfo.setDriverClassName("com.mysql.jdbc.Driver");
-			dataSourceInfo.setUrl("jdbc:mysql://localhost:3306/md_rst_platform?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");
-			dataSourceInfo.setUsername("root");
-			dataSourceInfo.setPassword("lovesnow");
-			dataSourceInfo.setInitialSize("1");
-			dataSourceInfo.setMinIdle("1");
-			dataSourceInfo.setMaxWait("60000");
-			dataSourceInfo.setMaxActive("50");
-			dataSourceInfo.setMinEvictableIdleTimeMillis("60000");
-		}
-
-		dataSourceService.changeDataSource(dataSourceInfo);
-		redisService.set(cacheKey, dataSourceInfo);
+//		String applicationCode = "MIS_TEST_DB";
+//		String cacheKey = DATABASE_CACHE + applicationCode.toUpperCase();
+//		DataSourceInfo dataSourceInfo = redisService.get(cacheKey);
+//		if (dataSourceInfo == null) {
+//			dataSourceInfo = new DataSourceInfo();
+//			dataSourceInfo.setApplicationCode(applicationCode);
+//			dataSourceInfo.setDriverClassName("com.mysql.jdbc.Driver");
+//			dataSourceInfo.setUrl("jdbc:mysql://localhost:3306/md_rst_platform?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");
+//			dataSourceInfo.setUsername("root");
+//			dataSourceInfo.setPassword("lovesnow");
+//			dataSourceInfo.setInitialSize("1");
+//			dataSourceInfo.setMinIdle("1");
+//			dataSourceInfo.setMaxWait("60000");
+//			dataSourceInfo.setMaxActive("50");
+//			dataSourceInfo.setMinEvictableIdleTimeMillis("60000");
+//		}
+//
+//		dataSourceService.changeDataSource(dataSourceInfo);
+//		redisService.set(cacheKey, dataSourceInfo);
 	}
 
 	@After(value = "aspectServiceForApi())")

@@ -6,7 +6,8 @@ import com.berritus.mis.core.component.annotation.EnableCoreComponent;
 import com.berritus.mis.core.controller.annotation.EnableMisController;
 import com.berritus.mis.core.dynamicdb.DynamicDataSourceRegister;
 import com.berritus.mis.core.dynamicdb.annotation.EnableCoreDynamicdb;
-import com.berritus.mis.core.rabbitmq.annotation.EnableMisRabbitMQ;
+import com.berritus.mis.core.rabbitmq.annotation.EnableMisRegisterRabbitMQ;
+import com.berritus.mis.core.rabbitmq.annotation.EnableMisUseRabbitMQ;
 import com.berritus.mis.core.task.annotation.EnableMisTask;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableMisRegisterRabbitMQ
 @MapperScan({"com.berritus.mis.dao"})
 @ComponentScan({"com.berritus.mis.controller", "com.berritus.mis.dao",
         "com.berritus.mis.service", "com.berritus.mis.query", "com.berritus.mis.dubbo",
@@ -31,7 +33,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableMisController
 @EnableAsync
 //@EnableMisTask
-@EnableMisRabbitMQ
+//@EnableMisUseRabbitMQ
 @EnableCoreComponent
 @EnableCoreDynamicdb
 @Import({DynamicDataSourceRegister.class})
