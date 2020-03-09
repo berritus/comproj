@@ -53,7 +53,7 @@ public class DynamicDataSourceAop {
 //	private void aspectServicePlat() {
 //	}
 
-	//专用于切本项目中WorkApiImpl类
+	//专用于切本项目中WorkApiImpl类 DemoServiceImpl MessageServiceImpl
 	@Pointcut(value = " execution(public * com.berritus.mis.service.impl.MessageServiceImpl.*(..)) and args(..)")
 	private void aspectServiceForApi() {
 	}
@@ -66,55 +66,44 @@ public class DynamicDataSourceAop {
 	public void doBefore(JoinPoint joinPoint) throws Exception {
 		// 2019-07-18 begin Qin Guihe
 		// old
-//		Object[] args = joinPoint.getArgs(); // 获得参数
-//		if (args != null && args.length > 0) {
-//			Object object = args[args.length - 1];// 获得最后一个参数，所以数据源的参数必须放到最后
-//			String dbCode = "";
-//			if (object instanceof String) {
-//				dbCode = object.toString();
-//			} else if (object instanceof Map) {
-//				Map<Object, Object> map = (Map<Object, Object>) object;
-//				dbCode = (String) map.get("applicationCode");
-//			} else if (object instanceof BaseEntity) {
-//				BaseEntity entity = (BaseEntity) object;
-//				dbCode = entity.getApplicationCode();
-//			} else if (object instanceof FunctionParas) {
-//				FunctionParas entity = (FunctionParas) object;
-//				dbCode = entity.getSysCode();
-//			}
-//			if (StringUtils.isEmpty(dbCode)) {
-//				log.error("数据源（租户id）：" + dbCode + " 不存在 ，对应的方法是： " + joinPoint.getSignature());
-//				throw new Exception("数据源（租户id）：" + dbCode + " 不存在 ，对应的方法是： " + joinPoint.getSignature());
-//			}
-        logger.info("当前数据源（租户id）：");
-//			//dbCode = "TEST_NOEXISTS";
-//			DataSourceUtils.changeDataSource(dbCode.toUpperCase());
-//		}
+		String applicationCode = "MIS_TEST_DB0";
+		Object[] args = joinPoint.getArgs(); // 获得参数
+		if (args != null && args.length > 0) {
+			Object object = args[args.length - 1];// 获得最后一个参数，所以数据源的参数必须放到最后
+			if (object instanceof String) {
+				applicationCode = object.toString();
+			}
+		}
 
-//		String applicationCode = "MIS_TEST_DB";
-//		String cacheKey = DATABASE_CACHE + applicationCode.toUpperCase();
-//		DataSourceInfo dataSourceInfo = redisService.get(cacheKey);
-//		if (dataSourceInfo == null) {
-//			dataSourceInfo = new DataSourceInfo();
-//			dataSourceInfo.setApplicationCode(applicationCode);
-//			dataSourceInfo.setDriverClassName("com.mysql.jdbc.Driver");
-//			dataSourceInfo.setUrl("jdbc:mysql://localhost:3306/md_rst_platform?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");
-//			dataSourceInfo.setUsername("root");
-//			dataSourceInfo.setPassword("lovesnow");
-//			dataSourceInfo.setInitialSize("1");
-//			dataSourceInfo.setMinIdle("1");
-//			dataSourceInfo.setMaxWait("60000");
-//			dataSourceInfo.setMaxActive("50");
-//			dataSourceInfo.setMinEvictableIdleTimeMillis("60000");
-//		}
-//
-//		dataSourceService.changeDataSource(dataSourceInfo);
-//		redisService.set(cacheKey, dataSourceInfo);
+        logger.info("当前数据源（租户id）：");
+
+		String cacheKey = DATABASE_CACHE + applicationCode.toUpperCase();
+		DataSourceInfo dataSourceInfo = redisService.get(cacheKey);
+		if (dataSourceInfo == null) {
+			dataSourceInfo = new DataSourceInfo();
+			dataSourceInfo.setApplicationCode(applicationCode);
+			dataSourceInfo.setDriverClassName("com.mysql.jdbc.Driver");
+			if ("MIS_TEST_DB".equals(applicationCode)) {
+				dataSourceInfo.setUrl("jdbc:mysql://localhost:3306/spring?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");
+			} else {
+				dataSourceInfo.setUrl("jdbc:mysql://localhost:3306/mis-message?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");
+			}
+			dataSourceInfo.setUsername("root");
+			dataSourceInfo.setPassword("lovesnow");
+			dataSourceInfo.setInitialSize("1");
+			dataSourceInfo.setMinIdle("1");
+			dataSourceInfo.setMaxWait("60000");
+			dataSourceInfo.setMaxActive("50");
+			dataSourceInfo.setMinEvictableIdleTimeMillis("60000");
+		}
+
+		dataSourceService.changeDataSource(dataSourceInfo);
+		redisService.set(cacheKey, dataSourceInfo);
 	}
 
 	@After(value = "aspectServiceForApi())")
 	public void doAfter(JoinPoint joinPoint) throws Exception {
-		//DataSourceUtils.restoreDataSource();
+		dataSourceService.restoreDataSource();
 	}
 
 	@AfterThrowing(value = "aspectServiceForApi())", throwing = "e")

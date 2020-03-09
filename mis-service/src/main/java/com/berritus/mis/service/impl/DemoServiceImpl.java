@@ -1,8 +1,10 @@
 package com.berritus.mis.service.impl;
 
 
+import com.berritus.mis.bean.demo.MeetingRoomApplyExt;
 import com.berritus.mis.bean.mybatis.SysFiles;
 import com.berritus.mis.bean.school.TbStudent;
+import com.berritus.mis.dao.demo.MeetingRoomApplyDao;
 import com.berritus.mis.dao.school.TbStudentMapper;
 import com.berritus.mis.dubbo.api.SysService;
 import com.berritus.mis.service.DemoService;
@@ -17,20 +19,34 @@ import java.util.UUID;
 
 
 @Service
-public class DemoServiceImpl implements DemoService {
+public class DemoServiceImpl {
 
     @Autowired
     private TbStudentMapper studentMapper;
     @Autowired
     @Qualifier("tranSysService")
     private SysService sysService;
+    //@Autowired
+    //private MeetingRoomApplyDao meetingRoomApplyDao;
+    @Autowired
+    private DynamicDemoServiceImpl dynamicDemoService;
 
-    @Override
+    //@Override
+    //@Transactional(propagation = Propagation.REQUIRED)
+    public void dynamicTest(MeetingRoomApplyExt meetingRoomApplyDTO, String sysCode) {
+        //meetingRoomApplyDao.insert(meetingRoomApplyDTO);
+        dynamicDemoService.dynamicTest(meetingRoomApplyDTO);
+        if (sysCode.equals("MIS_TEST_DB2")) {
+            //int i = 10 /0;
+        }
+    }
+
+    //@Override
     public String helloDubbo() {
         return "hello dubbo";
     }
 
-    @Override
+    //@Override
     @Transactional(propagation = Propagation.REQUIRED)
     public TbStudent addStudent(TbStudent student){
         studentMapper.insert(student);

@@ -6,6 +6,7 @@ import com.berritus.mis.bean.demo.MeetingRoomApplyExt;
 import com.berritus.mis.bean.school.TbStudent;
 import com.berritus.mis.core.rabbitmq.utils.RabbitMQUtil;
 import com.berritus.mis.dao.demo.MeetingRoomApplyDao;
+import com.berritus.mis.service.DemoService;
 import com.berritus.mis.service.MessageService;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
@@ -44,8 +46,10 @@ public class MessageServiceImpl implements MessageService {
 	private RabbitTemplate rabbitTemplate;
 	@Autowired
 	private RabbitMQUtil rabbitMQUtil;
+	//@Autowired
+	//private MeetingRoomApplyDao meetingRoomApplyDao;
 	@Autowired
-	private MeetingRoomApplyDao meetingRoomApplyDao;
+	private DemoServiceImpl demoService;
 
 
 	@Override
@@ -103,8 +107,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	@Transactional
-	public int dynamicTest() {
+	@Transactional(propagation = Propagation.REQUIRED)
+	public int dynamicTest(String sysCode) {
 		String uuid = UUID.randomUUID().toString().replace("-", "");
 		MeetingRoomApplyExt meetingRoomApplyDTO = new MeetingRoomApplyExt();
 		meetingRoomApplyDTO.setApplyId(uuid);
@@ -121,8 +125,10 @@ public class MessageServiceImpl implements MessageService {
 		meetingRoomApplyDTO.setStartDateStr(strDate);
 		meetingRoomApplyDTO.setEndDateStr(strDate);
 		meetingRoomApplyDTO.setModifyDateStr(strDate);
-		meetingRoomApplyDao.insert(meetingRoomApplyDTO);
-		// int i = 10 /0;
+		//meetingRoomApplyDao.insert(meetingRoomApplyDTO);
+		demoService.dynamicTest(meetingRoomApplyDTO, "MIS_TEST_DB");
+		demoService.dynamicTest(meetingRoomApplyDTO, "MIS_TEST_DB2");
+		//int i = 10 /0;
 		return 0;
 	}
 

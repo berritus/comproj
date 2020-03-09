@@ -111,7 +111,7 @@ public class BlockController {
     @MisLogger
     @RequestMapping("/dynamicTest")
     public String dynamicTest(){
-        messageService.dynamicTest();
+        messageService.dynamicTest("MIS_TEST_DB");
         return "dynamicTest";
     }
 
