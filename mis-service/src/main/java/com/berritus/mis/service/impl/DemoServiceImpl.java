@@ -19,7 +19,7 @@ import java.util.UUID;
 
 
 @Service
-public class DemoServiceImpl {
+public class DemoServiceImpl implements DemoService {
 
     @Autowired
     private TbStudentMapper studentMapper;
@@ -31,22 +31,22 @@ public class DemoServiceImpl {
     @Autowired
     private DynamicDemoServiceImpl dynamicDemoService;
 
-    //@Override
-    //@Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, transactionManager = "xatx")
     public void dynamicTest(MeetingRoomApplyExt meetingRoomApplyDTO, String sysCode) {
         //meetingRoomApplyDao.insert(meetingRoomApplyDTO);
         dynamicDemoService.dynamicTest(meetingRoomApplyDTO);
         if (sysCode.equals("MIS_TEST_DB2")) {
-            //int i = 10 /0;
+            int i = 10 /0;
         }
     }
 
-    //@Override
+    @Override
     public String helloDubbo() {
         return "hello dubbo";
     }
 
-    //@Override
+    @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public TbStudent addStudent(TbStudent student){
         studentMapper.insert(student);

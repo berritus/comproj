@@ -16,10 +16,11 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
+//@EnableJpaRepositories({"com.berritus.mis.dao"})
 @MapperScan({"com.berritus.mis.dao"})
 @ComponentScan({"com.berritus.mis.controller", "com.berritus.mis.dao",
         "com.berritus.mis.service", "com.berritus.mis.query", "com.berritus.mis.dubbo",

@@ -5,6 +5,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.fastjson.JSON;
 import com.berritus.mis.core.bean.dynamicdb.DataSourceInfo;
 import com.berritus.mis.core.cache.redis.IRedisService;
+import com.berritus.mis.core.common.constant.SystemConstant;
 import com.berritus.mis.core.dynamicdb.DataSourceService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -54,7 +55,7 @@ public class DynamicDataSourceAop {
 //	}
 
 	//专用于切本项目中WorkApiImpl类 DemoServiceImpl MessageServiceImpl
-	@Pointcut(value = " execution(public * com.berritus.mis.service.impl.MessageServiceImpl.*(..)) and args(..)")
+	@Pointcut(value = " execution(public * com.berritus.mis.service.impl.DemoServiceImpl.*(..)) and args(..)")
 	private void aspectServiceForApi() {
 	}
 
@@ -79,7 +80,9 @@ public class DynamicDataSourceAop {
 
 		String cacheKey = DATABASE_CACHE + applicationCode.toUpperCase();
 		DataSourceInfo dataSourceInfo = redisService.get(cacheKey);
+		boolean flag = false;
 		if (dataSourceInfo == null) {
+			flag = true;
 			dataSourceInfo = new DataSourceInfo();
 			dataSourceInfo.setApplicationCode(applicationCode);
 			dataSourceInfo.setDriverClassName("com.mysql.jdbc.Driver");
@@ -98,7 +101,9 @@ public class DynamicDataSourceAop {
 		}
 
 		dataSourceService.changeDataSource(dataSourceInfo);
-		redisService.set(cacheKey, dataSourceInfo);
+		if (flag) {
+			redisService.set(cacheKey, dataSourceInfo, SystemConstant.CACHE_LONG_DAY_SECOND);
+		}
 	}
 
 	@After(value = "aspectServiceForApi())")

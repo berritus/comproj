@@ -62,7 +62,7 @@
         </dependency>
         <dependency>
             <groupId>com.berritus.core</groupId>
-            <artifactId>mis-core-dynamicdb</artifactId>
+            <artifactId>mis-core-dynamicdb-xa</artifactId>
         </dependency>
     </dependencies>
 
