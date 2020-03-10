@@ -32,13 +32,15 @@ public class DemoServiceImpl implements DemoService {
     private DynamicDemoServiceImpl dynamicDemoService;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, transactionManager = "xatx")
+    //@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    //@Transactional
     public void dynamicTest(MeetingRoomApplyExt meetingRoomApplyDTO, String sysCode) {
         //meetingRoomApplyDao.insert(meetingRoomApplyDTO);
         dynamicDemoService.dynamicTest(meetingRoomApplyDTO);
         if (sysCode.equals("MIS_TEST_DB2")) {
-            int i = 10 /0;
+            //int i = 10 /0;
         }
+        //dynamicTest(meetingRoomApplyDTO, "MIS_TEST_DB2", size + 1);
     }
 
     @Override

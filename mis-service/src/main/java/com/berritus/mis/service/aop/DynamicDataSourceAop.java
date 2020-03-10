@@ -100,6 +100,7 @@ public class DynamicDataSourceAop {
 			dataSourceInfo.setMinEvictableIdleTimeMillis("60000");
 		}
 
+		logger.info("url={}", dataSourceInfo.getUrl());
 		dataSourceService.changeDataSource(dataSourceInfo);
 		if (flag) {
 			redisService.set(cacheKey, dataSourceInfo, SystemConstant.CACHE_LONG_DAY_SECOND);
