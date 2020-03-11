@@ -107,7 +107,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	//@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(propagation = Propagation.REQUIRED)
 	public int dynamicTest(String sysCode) {
 		String uuid = UUID.randomUUID().toString().replace("-", "");
 		MeetingRoomApplyExt meetingRoomApplyDTO = new MeetingRoomApplyExt();
