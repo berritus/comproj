@@ -1,4 +1,4 @@
-package com.minstone.common.utils;
+package com.berritus.mis.common.utils;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -16,7 +16,6 @@ import java.util.concurrent.Executors;
 import javax.imageio.ImageIO;
 
 import com.lowagie.text.Document;
-import com.minstone.oa.common.thread.OaExecutors;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
@@ -49,11 +48,13 @@ public class PDFUtils {
 		//pdf2png3("E:\\pdf", "32", "png");
 		//pdf2png3old("E:\\pdf","ceshi","png");
 
-		//pdfToImage("E:\\pdf\\32.pdf");
+		//pdfToImage("E:\\pdf\\WebServices.pdf");
 		//}
 
 		imgToPdf("E:\\pdf\\", "E:\\pdf\\hebing.pdf");
 	}
+
+
 
 	public static void imgToPdf(String imageFolderPath, String pdfPath) {
 		long t1 = System.currentTimeMillis();
@@ -137,7 +138,7 @@ public class PDFUtils {
 
 			if (total > 30) {
 				int processNum = Runtime.getRuntime().availableProcessors();
-				ExecutorService executorService = OaExecutors.newFixedThreadPool(processNum - 1);
+				ExecutorService executorService = Executors.newFixedThreadPool(processNum - 1);
 				latch = new CountDownLatch(total);
 				for (int i = 0; i < total; i++) {
 					ThreadOriginPdf threadOriginPdf = new ThreadOriginPdf(renderer, i, latch, pdfPath);
@@ -370,7 +371,7 @@ public class PDFUtils {
 			if (pageCount >= 40) {
 				latch = new CountDownLatch(pageCount);
 				int processNum = Runtime.getRuntime().availableProcessors();
-				ExecutorService executorService = OaExecutors.newFixedThreadPool(processNum - 1);
+				ExecutorService executorService = Executors.newFixedThreadPool(processNum - 1);
 				//ExecutorService executorService = Executors.newFixedThreadPool(10);
 				for (int i = 0; i < pageCount; i++) {
 					ThreadPdf threadPdf = new ThreadPdf(renderer, doc, i, latch, fileAddress, filename, type);
