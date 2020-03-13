@@ -9,13 +9,18 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.imageio.ImageIO;
 
-import com.lowagie.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.Document;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
@@ -23,9 +28,6 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Element;
 import com.lowagie.text.Rectangle;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfGState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.lowagie.text.pdf.PdfWriter;
@@ -43,6 +45,7 @@ public class PDFUtils {
 	private static final int THREAD_PAGE_COUNT = 40;
 
 	public static void main(String[] args) throws Exception {
+		 String savepath = "E:\\pdf\\all.pdf";
 		//for (int i = 0; i <= 10; i++) {
 		// 351 32
 		//pdf2png3("E:\\pdf", "32", "png");
@@ -51,59 +54,61 @@ public class PDFUtils {
 		//pdfToImage("E:\\pdf\\WebServices.pdf");
 		//}
 
-		imgToPdf("E:\\pdf\\", "E:\\pdf\\hebing.pdf");
+		//imgToPdf("E:\\pdf\\", "E:\\pdf\\hebing.pdf");
+
+		List<String> fileList = getFiles();
+		morePdfTopdf(fileList, savepath);
 	}
 
 
+	public static List<String> getFiles() {
+		List<String> fileList = new ArrayList<String>();
+		fileList.add("E:\\pdf\\24.pdf");
+		fileList.add("E:\\pdf\\32.pdf");
+		fileList.add("E:\\pdf\\38.pdf");
+		//fileList.add("E:\\pdf\\351.pdf");
+		return fileList;
+	}
 
-	public static void imgToPdf(String imageFolderPath, String pdfPath) {
+	public static void morePdfTopdf(List<String> fileList, String savepath) {
 		long t1 = System.currentTimeMillis();
 		long t2 = System.currentTimeMillis();
-
-		Document doc = null;
+		Document document = null;
 		try {
-			// 图片地址
-			String imagePath = null;
-			// 输入流
-			FileOutputStream fos = new FileOutputStream(pdfPath);
-			// 创建文档
-			doc = new Document(null, 0, 0, 0, 0);
-			// 写入PDF文档
-			PdfWriter.getInstance(doc, fos);
-			// 读取图片流
-			BufferedImage img = null;
-			// 实例化图片
-			Image image = null;
-			// 获取图片文件夹对象
-			File file = new File(imageFolderPath);
-			File[] files = file.listFiles();
-			// 循环获取图片文件夹内的图片
-			for (File file1 : files) {
-				if (file1.getName().endsWith(".png") || file1.getName().endsWith(".jpg")
-						|| file1.getName().endsWith(".gif")
-						|| file1.getName().endsWith(".jpeg")
-						|| file1.getName().endsWith(".tif")) {
-					imagePath = imageFolderPath + file1.getName();
-					logger.info("合并：" + file1.getName());
-					// 读取图片流
-					img = ImageIO.read(new File(imagePath));
-					doc.setPageSize(new Rectangle(img.getWidth(), img.getHeight()));
-					// 实例化图片
-					image = Image.getInstance(imagePath);
-					// 添加图片到文档
-					doc.open();
-					doc.add(image);
+			document = new Document(new PdfReader(fileList.get(0)).getPageSize(1));
+			PdfCopy copy = new PdfCopy(document, new FileOutputStream(savepath));
+			document.open();
+			for (int i = 0; i < fileList.size(); i++) {
+				PdfReader reader = new PdfReader(fileList.get(i));
+				// 获得总页码
+				int n = reader.getNumberOfPages();
+				for (int j = 1; j <= n; j++) {
+					document.newPage();
+					// 从当前Pdf,获取第j页
+					PdfImportedPage page = copy.getImportedPage(reader, j);
+					PdfCopy.PageStamp stamp = copy.createPageStamp(page);
+					PdfContentByte underContent = stamp.getOverContent();
+					com.itextpdf.text.Rectangle rect = reader.getPageSize(j);
+					com.itextpdf.text.Rectangle pageRect = page.getBoundingBox();
+					copy.setPageSize(rect);
+					underContent.saveState();
+					underContent.restoreState();
+					stamp.alterContents();
+
+					copy.addPage(page);
 				}
+				System.out.println(i);
 			}
-		} catch (Exception e) {
-			logger.error("合并异常：{}", e);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DocumentException e) {
+			e.printStackTrace();
 		} finally {
-			if (doc != null && doc.isOpen()) {
-				// 关闭文档
-				doc.close();
+			if (document != null) {
+				document.close();
 			}
 			t2 = System.currentTimeMillis();
-			logger.info("合并总耗时 times= {} ms", (t2 - t1));
+			logger.info("finish use time={} ms", t2 - t1);
 		}
 	}
 
