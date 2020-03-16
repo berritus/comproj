@@ -44,8 +44,7 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	//@Qualifier("msgRabbitTemplate")
 	private RabbitTemplate rabbitTemplate;
-	@Autowired
-	private RabbitMQUtil rabbitMQUtil;
+
 	//@Autowired
 	//private MeetingRoomApplyDao meetingRoomApplyDao;
 	@Autowired
@@ -66,48 +65,14 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
+	//@Transactional(propagation = Propagation.REQUIRED)
 	public int sendMsgTest() {
-		TbStudent tbStudent = new TbStudent();
-		tbStudent.setStuName("2232");
-		tbStudent.setAge(13);
-		tbStudent.setId(10000);
-		//String json = JSON.toJSONString(tbStudent);
-
-		String uuid = UUID.randomUUID().toString().replace("-", "");
-		MeetingRoomApplyExt meetingRoomApplyDTO = new MeetingRoomApplyExt();
-		meetingRoomApplyDTO.setApplyId(uuid);
-		meetingRoomApplyDTO.setApplicationCode("MD_TEST_MEET");
-
-		uuid = UUID.randomUUID().toString().replace("-", "");
-		meetingRoomApplyDTO.setRoomId(uuid);
-		meetingRoomApplyDTO.setCreator("oa");
-		meetingRoomApplyDTO.setState((byte)1);
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String strDate = sdf.format(new Date());
-		meetingRoomApplyDTO.setCrtDateStr(strDate);
-		meetingRoomApplyDTO.setStartDateStr(strDate);
-		meetingRoomApplyDTO.setEndDateStr(strDate);
-		//meetingRoomApplyDTO.setModifyDateStr(strDate);
-		//meetingRoomApplyDao.insert(meetingRoomApplyDTO);
-
-		//int i = 10 /0;
-		Message message = rabbitMQUtil.getMessage(meetingRoomApplyDTO);
-		//byte[] body = message.getBody();
-		//String str0 = new String(body);
-		//System.out.println(str0);
-
-		// direct
-		rabbitMQUtil.sendMessage(message, "default_exchange", "test_routing_key");
-		// fanout
-		//rabbitMQUtil.sendMessage(message, "fanout_exchange0", "");
-		// topic
-		//rabbitMQUtil.sendMessage(message, "topic_exchange0", "topic.message");
+		demoService.sendMsgTest("MIS_TEST_DB");
 		return 0;
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
+	//@Transactional(propagation = Propagation.REQUIRED)
 	public int dynamicTest(String sysCode) {
 		String uuid = UUID.randomUUID().toString().replace("-", "");
 		MeetingRoomApplyExt meetingRoomApplyDTO = new MeetingRoomApplyExt();
@@ -133,8 +98,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	// direct
-	@RabbitListener(queues = {"test_queue"})
-	@RabbitHandler
+	//@RabbitListener(queues = {"test_queue"})
+	//@RabbitHandler
 	public void handleMsg(Message message, Channel channel) throws IOException {
 		try{
             //String cust = JSON.parseObject(message.getBody(), String.class);
