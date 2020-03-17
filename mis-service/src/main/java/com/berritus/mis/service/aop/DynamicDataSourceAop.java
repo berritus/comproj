@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.berritus.mis.core.bean.dynamicdb.DataSourceInfo;
 import com.berritus.mis.core.cache.redis.IRedisService;
 import com.berritus.mis.core.common.constant.SystemConstant;
-import com.berritus.mis.core.dynamicdb.DataSourceService;
+import com.berritus.mis.core.dynamicdb.xa.DataSourceXaService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -32,7 +32,7 @@ public class DynamicDataSourceAop {
 	public static Logger logger = LoggerFactory.getLogger(DynamicDataSourceAop.class);
 
 	@Autowired
-	private DataSourceService dataSourceService;
+	private DataSourceXaService dataSourceService;
 	@Autowired
 	private IRedisService redisService;
 
@@ -100,7 +100,8 @@ public class DynamicDataSourceAop {
 			dataSourceInfo.setMinEvictableIdleTimeMillis("60000");
 		}
 
-		logger.info("url={}", dataSourceInfo.getUrl());
+		String url = dataSourceInfo.getUrl();
+		logger.info("url={}", url);
 		dataSourceService.changeDataSource(dataSourceInfo);
 		if (flag) {
 			redisService.set(cacheKey, dataSourceInfo, SystemConstant.CACHE_LONG_DAY_SECOND);

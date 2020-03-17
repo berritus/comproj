@@ -79,16 +79,20 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    //@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    @Transactional
+    @Transactional(propagation = Propagation.SUPPORTS)
+    //@Transactional(transactionManager = "xatx")
+    //@Transactional
     public void dynamicTest(MeetingRoomApplyExt meetingRoomApplyDTO, String sysCode) {
         //meetingRoomApplyDao.insert(meetingRoomApplyDTO);
         dynamicDemoService.dynamicTest(meetingRoomApplyDTO);
+        //int i = 10 /0;
+        if (!sysCode.equals("MIS_TEST_DB2")) {
+            //dynamicTest(meetingRoomApplyDTO, "MIS_TEST_DB2");
+        }
+
         if (sysCode.equals("MIS_TEST_DB2")) {
             //int i = 10 /0;
         }
-        int i = 10 /0;
-        //dynamicTest(meetingRoomApplyDTO, "MIS_TEST_DB2", size + 1);
     }
 
     @Override

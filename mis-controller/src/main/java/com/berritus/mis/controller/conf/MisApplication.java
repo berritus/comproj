@@ -4,8 +4,8 @@ import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import com.berritus.mis.core.cache.annotation.EnableMisCache;
 import com.berritus.mis.core.component.annotation.EnableCoreComponent;
 import com.berritus.mis.core.controller.annotation.EnableMisController;
-import com.berritus.mis.core.dynamicdb.DynamicDataSourceRegister;
-import com.berritus.mis.core.dynamicdb.annotation.EnableCoreDynamicdb;
+import com.berritus.mis.core.dynamicdb.xa.DynamicDataSourceRegister;
+import com.berritus.mis.core.dynamicdb.xa.annotation.EnableCoreDynamicdbXa;
 import com.berritus.mis.core.rabbitmq.annotation.EnableMisRegisterRabbitMQ;
 import com.berritus.mis.core.rabbitmq.annotation.EnableMisUseRabbitMQ;
 import com.berritus.mis.core.task.annotation.EnableMisTask;
@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableMisRegisterRabbitMQ
 @EnableMisUseRabbitMQ
 @EnableCoreComponent
-@EnableCoreDynamicdb
+@EnableCoreDynamicdbXa
 @Import({DynamicDataSourceRegister.class})
 public class MisApplication {
     public static void main(String[] args){
