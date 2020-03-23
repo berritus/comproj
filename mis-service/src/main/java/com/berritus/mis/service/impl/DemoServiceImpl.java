@@ -8,6 +8,7 @@ import com.berritus.mis.core.rabbitmq.utils.RabbitMQUtil;
 import com.berritus.mis.dao.demo.MeetingRoomApplyDao;
 import com.berritus.mis.dao.school.TbStudentMapper;
 import com.berritus.mis.dubbo.api.SysService;
+import com.berritus.mis.service.DemoSecondService;
 import com.berritus.mis.service.DemoService;
 import org.springframework.amqp.core.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ public class DemoServiceImpl implements DemoService {
     private DynamicDemoServiceImpl dynamicDemoService;
     @Autowired
     private RabbitMQUtil rabbitMQUtil;
+    @Autowired
+    private DemoSecondService demoSecondService;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
@@ -79,7 +82,7 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     //@Transactional(transactionManager = "xatx")
     //@Transactional
     public void dynamicTest(MeetingRoomApplyExt meetingRoomApplyDTO, String sysCode) {
@@ -87,7 +90,20 @@ public class DemoServiceImpl implements DemoService {
         dynamicDemoService.dynamicTest(meetingRoomApplyDTO);
         //int i = 10 /0;
         if (!sysCode.equals("MIS_TEST_DB2")) {
-            //dynamicTest(meetingRoomApplyDTO, "MIS_TEST_DB2");
+            //demoSecondService.dynamicTest(meetingRoomApplyDTO, "MIS_TEST_DB2");
+        }
+
+        if (sysCode.equals("MIS_TEST_DB2")) {
+            //int i = 10 /0;
+        }
+    }
+
+    @Transactional
+    public void dynamicTest2(MeetingRoomApplyExt meetingRoomApplyDTO, String sysCode) {
+        //meetingRoomApplyDao.insert(meetingRoomApplyDTO);
+        dynamicDemoService.dynamicTest(meetingRoomApplyDTO);
+        //int i = 10 /0;
+        if (!sysCode.equals("MIS_TEST_DB2")) {
         }
 
         if (sysCode.equals("MIS_TEST_DB2")) {

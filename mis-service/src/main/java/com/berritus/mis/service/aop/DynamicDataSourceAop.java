@@ -59,11 +59,15 @@ public class DynamicDataSourceAop {
 	private void aspectServiceForApi() {
 	}
 
+	@Pointcut(value = " execution(public * com.berritus.mis.service.impl.DemoSecondServiceImpl.*(..)) and args(..)")
+	private void aspectServiceForApi2() {
+	}
+
 //	@Pointcut(value = " execution(public * com.minstone.instance.async.component.impl.MessageReminderServiceImpl.*(..)) and args(..)")
 //	private void aspectServiceSms() {
 //	}
 
-	@Before(value = "aspectServiceForApi()")
+	@Before(value = "aspectServiceForApi() || aspectServiceForApi2()")
 	public void doBefore(JoinPoint joinPoint) throws Exception {
 		// 2019-07-18 begin Qin Guihe
 		// old
@@ -108,12 +112,12 @@ public class DynamicDataSourceAop {
 		}
 	}
 
-	@After(value = "aspectServiceForApi())")
+	@After(value = "aspectServiceForApi() || aspectServiceForApi2()")
 	public void doAfter(JoinPoint joinPoint) throws Exception {
 		dataSourceService.restoreDataSource();
 	}
 
-	@AfterThrowing(value = "aspectServiceForApi())", throwing = "e")
+	@AfterThrowing(value = "aspectServiceForApi() || aspectServiceForApi2()", throwing = "e")
 	public void afterThrowing(JoinPoint joinPoint, Exception e) {
 		//String baseInfo = DataSourceUtils.getLogBaseInfo(joinPoint);
 		//logger.info("调用接口出现异常，基本信息={}，异常={}", baseInfo, e);

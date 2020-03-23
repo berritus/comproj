@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         "com.berritus.mis.service", "com.berritus.mis.query", "com.berritus.mis.dubbo",
         "com.berritus.mis.task", "com.berritus.test"})
 @SpringBootApplication
-@EnableTransactionManagement
+//@EnableTransactionManagement
 @ServletComponentScan({"com.berritus.mis.controller.conf"})
 @EnableDubboConfiguration
 @EnableAspectJAutoProxy
