@@ -4,17 +4,26 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.berritus.mis.bean.school.TbStudent;
 import com.berritus.mis.dao.school.TbStudentMapper;
 import com.berritus.mis.dubbo.api.DubboDemoService;
+import com.berritus.mis.service.base.CallProcedureService;
 import com.dianping.cat.Cat;
 import com.dianping.cat.message.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+// @Transactional
 @org.springframework.stereotype.Service
 @Service(version = "1.0.2", interfaceClass = DubboDemoService.class)//
 public class DubboTranDemoServiceImpl implements DubboDemoService {
     @Autowired
     private TbStudentMapper studentMapper;
+    @Autowired
+    private CallProcedureService callProcedureService;
+
+    @Override
+    public String callProduce(String sysCode) {
+        callProcedureService.callProcedureCreateMqMessageInfoXx("mq_message_info_1", sysCode);
+        return "success";
+    }
 
     @Override
     public String helloDubbo() {

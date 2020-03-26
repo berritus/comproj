@@ -11,6 +11,8 @@ import com.berritus.mis.bean.school.TbStudent;
  * 才能完成reference，不然会报null
  */
 public interface DubboDemoService {
-    public String helloDubbo();
-    public TbStudent addStudent(TbStudent student);
+    String helloDubbo();
+    TbStudent addStudent(TbStudent student);
+
+    String callProduce(String sysCode);
 }

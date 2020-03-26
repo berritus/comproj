@@ -132,4 +132,13 @@ public class BlockController {
             }
         }
     }
+
+    // http://localhost:8081/callProduce
+    @MisLogger
+    @RequestMapping("/callProduce")
+    public String callProduce(){
+        // messageService.sendConfirmMsg("rabbitmq");
+        dubboDemoService.callProduce("MIS_TEST_DB");
+        return "rabbitmq";
+    }
 }

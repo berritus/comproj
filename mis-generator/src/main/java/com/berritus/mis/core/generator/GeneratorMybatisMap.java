@@ -1,4 +1,4 @@
-package com.minstone.dec.generator;//package com.minstone.dec.dao.generator;
+package com.berritus.mis.core.generator;
 
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;

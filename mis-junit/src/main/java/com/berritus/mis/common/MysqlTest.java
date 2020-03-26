@@ -35,38 +35,32 @@ public class MysqlTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<String> doDeposit() {
-        List<String> resultList = (List<String>) jdbcTemplate.execute(new CallableStatementCreator() {
+    public void callProcedureCreateDealInfoDealInfo(String tableName) {
+        jdbcTemplate.execute(new CallableStatementCreator() {
             @Override
             public CallableStatement createCallableStatement(Connection con) throws SQLException {
-                String storedProc = "{call createFlowInstXx(?)}";// 调用的sql
+                String storedProc = "{call createDealInfoXx(?)}";// 调用的sql
                 CallableStatement cs = con.prepareCall(storedProc);
-                cs.registerOutParameter(9,java.sql.Types.INTEGER);// 注册输出参数 返回类型
-                cs.registerOutParameter(10,java.sql.Types.VARCHAR);// 注册输出参数 返回信息
+                cs.setString(1, tableName);
+                //cs.registerOutParameter(9,java.sql.Types.INTEGER);// 注册输出参数 返回类型
+                //cs.registerOutParameter(10,java.sql.Types.VARCHAR);// 注册输出参数 返回信息
                 return cs;
             }
         }, new CallableStatementCallback() {
             @Override
             public Object doInCallableStatement(CallableStatement cs) throws SQLException, DataAccessException {
-                List<String> result = new ArrayList<String>();
+                //List<String> result = new ArrayList<String>();
                 cs.execute();
 
-                result.add(cs.getString(9));
-                result.add(cs.getString(10));
-                return result;
+                //result.add(cs.getString(9));
+                //result.add(cs.getString(10));
+                return null;
             }
         });
-
-
-        return resultList;
-
     }
 
     @Test
     public void test1(){
-        TbStudent student = new TbStudent();
-        student.setAge(21);
-        student.setStuName("1222");
-        demoService.addStudent(student);
+        callProcedureCreateDealInfoDealInfo("deall_info_1");
     }
 }
