@@ -82,9 +82,9 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    // @Transactional(propagation = Propagation.REQUIRED)
     //@Transactional(transactionManager = "xatx")
-    //@Transactional
+    @Transactional
     public void dynamicTest(MeetingRoomApplyExt meetingRoomApplyDTO, String sysCode) {
         //meetingRoomApplyDao.insert(meetingRoomApplyDTO);
         dynamicDemoService.dynamicTest(meetingRoomApplyDTO);

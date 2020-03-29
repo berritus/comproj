@@ -74,7 +74,7 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	//@Transactional(propagation = Propagation.REQUIRED)
 	//@Transactional(transactionManager = "xatx")
-	@Transactional
+	//@Transactional
 	public int dynamicTest(String sysCode) {
 		String uuid = UUID.randomUUID().toString().replace("-", "");
 		MeetingRoomApplyExt meetingRoomApplyDTO = new MeetingRoomApplyExt();
