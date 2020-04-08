@@ -17,6 +17,8 @@ public class SysTablesMapDTO extends MisBean {
 
     private String mapTableName;
 
+    private Integer tableNum;
+
     private Long startIndex;
 
     private Long endIndex;
@@ -51,6 +53,14 @@ public class SysTablesMapDTO extends MisBean {
 
     public void setMapTableName(String mapTableName) {
         this.mapTableName = mapTableName == null ? null : mapTableName.trim();
+    }
+
+    public Integer getTableNum() {
+        return tableNum;
+    }
+
+    public void setTableNum(Integer tableNum) {
+        this.tableNum = tableNum;
     }
 
     public Long getStartIndex() {

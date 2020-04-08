@@ -139,6 +139,14 @@ public class BlockController {
     public String callProduce(){
         // messageService.sendConfirmMsg("rabbitmq");
         dubboDemoService.callProduce("MIS_TEST_DB");
-        return "rabbitmq";
+        return "callProduce";
+    }
+
+    // http://localhost:8081/addStudent
+    @MisLogger
+    @RequestMapping("/addStudent")
+    public String addStudent(){
+        dubboDemoService.addStudent();
+        return "addStudent";
     }
 }

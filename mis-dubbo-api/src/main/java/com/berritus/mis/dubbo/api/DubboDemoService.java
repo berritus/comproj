@@ -13,6 +13,6 @@ import com.berritus.mis.bean.school.TbStudent;
 public interface DubboDemoService {
     String helloDubbo();
     TbStudent addStudent(TbStudent student);
-
+    TbStudent addStudent();
     String callProduce(String sysCode);
 }

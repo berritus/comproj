@@ -1,4 +1,4 @@
-package com.berritus.mis.service.impl;
+package com.berritus.mis.service.base;
 
 import com.berritus.mis.bean.demo.SysTablesMapDTO;
 import com.berritus.mis.core.component.service.MisCoreService;

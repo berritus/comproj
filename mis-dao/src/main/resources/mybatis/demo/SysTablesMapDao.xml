@@ -5,6 +5,7 @@
     <id column="seq_id" jdbcType="BIGINT" property="seqId" />
     <result column="table_type" jdbcType="VARCHAR" property="tableType" />
     <result column="map_table_name" jdbcType="VARCHAR" property="mapTableName" />
+    <result column="table_num" jdbcType="BIGINT" property="tableNum" />
     <result column="start_index" jdbcType="BIGINT" property="startIndex" />
     <result column="end_index" jdbcType="BIGINT" property="endIndex" />
     <result column="state" jdbcType="TINYINT" property="state" />
@@ -14,7 +15,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    seq_id, table_type, map_table_name, start_index, end_index, state, state_date, crt_date, 
+    seq_id, table_type, map_table_name, table_num, start_index, end_index, state, state_date, crt_date,
     application_code
   </sql>
 
@@ -31,12 +32,12 @@
   </delete>
 
   <insert id="insert" parameterType="com.berritus.mis.bean.demo.SysTablesMapDTO">
-    insert into sys_tables_map (seq_id, table_type, map_table_name, 
+    insert into sys_tables_map (seq_id, table_type, map_table_name,table_num,
       start_index, end_index, state, 
       state_date, crt_date, application_code
       )
     values (#{seqId,jdbcType=BIGINT}, #{tableType,jdbcType=VARCHAR}, #{mapTableName,jdbcType=VARCHAR}, 
-      #{startIndex,jdbcType=BIGINT}, #{endIndex,jdbcType=BIGINT}, #{state,jdbcType=TINYINT}, 
+      #{tableNum,jdbcType=BIGINT},#{startIndex,jdbcType=BIGINT}, #{endIndex,jdbcType=BIGINT}, #{state,jdbcType=TINYINT},
       #{stateDate,jdbcType=TIMESTAMP}, #{crtDate,jdbcType=TIMESTAMP}, #{applicationCode,jdbcType=VARCHAR}
       )
   </insert>
@@ -112,6 +113,9 @@
       <if test="mapTableName != null">
         map_table_name = #{mapTableName,jdbcType=VARCHAR},
       </if>
+      <if test="tableNum != null">
+        table_num = #{tableNum,jdbcType=BIGINT},
+      </if>
       <if test="startIndex != null">
         start_index = #{startIndex,jdbcType=BIGINT},
       </if>
@@ -146,4 +150,16 @@
       application_code = #{applicationCode,jdbcType=VARCHAR}
     where seq_id = #{seqId,jdbcType=BIGINT}
   </update>
+
+  <select id="selectLastestSysTablesMap" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_tables_map
+    where table_type = #{tableType,jdbcType=VARCHAR} order by table_num desc limit 1
+  </select>
+
+  <select id="getXxxTableCount" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select count(*) from ${tableName}
+  </select>
+
 </mapper>

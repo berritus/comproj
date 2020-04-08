@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysTablesMapDao extends MisDao<SysTablesMapDTO, Long> {
 
+	SysTablesMapDTO selectLastestSysTablesMap(String tableType);
+
+	long getXxxTableCount(String tableName);
 }

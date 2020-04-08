@@ -5,6 +5,7 @@ import com.berritus.mis.bean.school.TbStudent;
 import com.berritus.mis.dao.school.TbStudentMapper;
 import com.berritus.mis.dubbo.api.DubboDemoService;
 import com.berritus.mis.service.base.CallProcedureService;
+import com.berritus.mis.service.base.SplitTableService;
 import com.dianping.cat.Cat;
 import com.dianping.cat.message.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class DubboTranDemoServiceImpl implements DubboDemoService {
     private TbStudentMapper studentMapper;
     @Autowired
     private CallProcedureService callProcedureService;
+    @Autowired
+    private SplitTableService splitTableService;
 
     @Override
     public String callProduce(String sysCode) {
@@ -43,6 +46,21 @@ public class DubboTranDemoServiceImpl implements DubboDemoService {
     public TbStudent addStudent(TbStudent student) {
         studentMapper.insert(student);
         //throw new RuntimeException("错误啦");
+        return student;
+    }
+
+    @Override
+    public TbStudent addStudent() {
+        TbStudent student = new TbStudent();
+        student.setAge(28);
+        student.setStuName("aaaaaa");
+
+        splitTableService.checkStudentIsNeedSplit();
+        studentMapper.insert(student);
+        //throw new RuntimeException("错误啦");
+//        student.setId(5070);
+//        student.setStuName("99222233339");
+//        studentMapper.updateByPrimaryKey(student);
         return student;
     }
 

@@ -46,4 +46,24 @@ public class CallProcedureService {
             }
         });
     }
+
+    public void callProcedureCreateStudentXx(String tableName, String sysCode) {
+        jdbcTemplate.execute(new CallableStatementCreator() {
+            @Override
+            public CallableStatement createCallableStatement(Connection con) throws SQLException {
+                // 调用的sql
+                String storedProc = "{call createStudentXx(?)}";
+                CallableStatement cs = con.prepareCall(storedProc);
+                cs.setString(1, tableName);
+                return cs;
+            }
+        }, new CallableStatementCallback() {
+            @Override
+            public Object doInCallableStatement(CallableStatement cs) throws SQLException, DataAccessException {
+                cs.execute();
+                logger.info("调用存储过程新建表{},sysCode={}", tableName, sysCode);
+                return null;
+            }
+        });
+    }
 }
