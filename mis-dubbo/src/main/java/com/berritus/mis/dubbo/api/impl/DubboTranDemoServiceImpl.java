@@ -55,7 +55,7 @@ public class DubboTranDemoServiceImpl implements DubboDemoService {
         student.setAge(28);
         student.setStuName("aaaaaa");
 
-        splitTableService.checkStudentIsNeedSplit();
+        // splitTableService.checkStudentIsNeedSplit();
         studentMapper.insert(student);
         //throw new RuntimeException("错误啦");
 //        student.setId(5070);
