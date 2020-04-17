@@ -26,7 +26,12 @@ public class SplitTableService {
 		String nowTableName = sysTablesMap.getMapTableName();
 		int tableNum = sysTablesMap.getTableNum();
 
-		long tableCount = sysTablesMapDao.getXxxTableCount(nowTableName);
+		SysTablesMapDTO sysTablesMapDTO = new SysTablesMapDTO();
+		sysTablesMapDTO.setApplicationCode("MIS_CODE");
+
+		nowTableName = "tb_student2";
+		sysTablesMapDTO.setTableName(nowTableName);
+		long tableCount = sysTablesMapDao.getXxxTableCount(sysTablesMapDTO);
 		if (tableCount > 2) {
 
 		}

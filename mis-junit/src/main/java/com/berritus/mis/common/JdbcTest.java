@@ -72,14 +72,16 @@ public class JdbcTest {
 		CallableStatement clbStmt = null; // CallableStatement对象
 		ResultSet res = null; // 结果集对象
 		try {
+			String msg = "";
 			// 获取数据库连接
 			conn = getConnection();
 
 			// 创建CallableStatement对象
-			clbStmt = conn.prepareCall("{CALL createStudentXx(?)}");
+			clbStmt = conn.prepareCall("{CALL createStudentXx(?,?)}");
 
 			// 设置输入参数
 			clbStmt.setString(1, "tb_student2"); // 查询第3页数据
+			clbStmt.setString(1, msg); // 查询第3页数据
 //			clbStmt.setInt(2, 10); // 每页10条数据
 //
 //			// 注册输出参数

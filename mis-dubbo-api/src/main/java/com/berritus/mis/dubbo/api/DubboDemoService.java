@@ -15,4 +15,5 @@ public interface DubboDemoService {
     TbStudent addStudent(TbStudent student);
     TbStudent addStudent();
     String callProduce(String sysCode);
+    TbStudent getStudent(TbStudent student);
 }

@@ -149,4 +149,13 @@ public class BlockController {
         dubboDemoService.addStudent();
         return "addStudent";
     }
+
+    // http://localhost:8081/qryStudent
+    @MisLogger
+    @RequestMapping("/qryStudent")
+    public TbStudent qryStudent(){
+        TbStudent student = new TbStudent();
+        student.setId(5103);
+        return dubboDemoService.getStudent(student);
+    }
 }

@@ -31,6 +31,8 @@ public class SysTablesMapDTO extends MisBean {
 
     private String applicationCode;
 
+    private String tableName;
+
     public Long getSeqId() {
         return seqId;
     }
@@ -109,6 +111,14 @@ public class SysTablesMapDTO extends MisBean {
 
     public void setApplicationCode(String applicationCode) {
         this.applicationCode = applicationCode == null ? null : applicationCode.trim();
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
     @Override

@@ -158,8 +158,20 @@
     where table_type = #{tableType,jdbcType=VARCHAR} order by table_num desc limit 1
   </select>
 
-  <select id="getXxxTableCount" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select count(*) from ${tableName}
+  <select id="selectNowUseTableName" parameterType="java.lang.String" resultType="java.lang.String">
+    select map_table_name
+    from sys_tables_map
+    where table_type = #{tableType,jdbcType=VARCHAR} and state = 2 ORDER BY table_num asc limit 1
+  </select>
+
+  <select id="selectTableNameByIndex" resultType="java.lang.String">
+    select map_table_name from sys_tables_map where table_type = #{tableType,jdbcType=VARCHAR}
+    and #{indexPos,jdbcType=BIGINT} &gt;= start_index and #{indexPos,jdbcType=BIGINT} &lt;= end_index
+    and application_code = #{applicationCode,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getXxxTableCount" resultType="java.lang.Long">
+    select count(*) from ${tableName} where application_code = #{applicationCode,jdbcType=VARCHAR}
   </select>
 
 </mapper>
