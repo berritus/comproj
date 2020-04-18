@@ -5,18 +5,19 @@ import com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl;
 import com.berritus.mis.dao.school.TbStudentMapper;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ParameterMapping;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.TypeHandlerRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,21 +30,25 @@ import java.util.Properties;
 
 /**
  * @Copyright:
- * @Description:
+ * @Description: MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class
  * @Author: Qin Guihe
  * @Create: 2020-04-17
  */
 @Intercepts({
 		@Signature(
-				method = "selectByPrimaryKey",
-				type = TbStudentMapper.class,
+				method = "query",
+				type = Executor.class,
 				args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}
 		)
 })
+//@Component
 public class SQLInterceptor implements Interceptor {
+	private static final Logger logger= LoggerFactory.getLogger(SQLInterceptor.class);
+
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
 
+		logger.info("============SQLInterceptor intercept");
 		MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
 		Object parameter = null;
 		if (invocation.getArgs().length > 1) {
@@ -165,11 +170,11 @@ public class SQLInterceptor implements Interceptor {
 
 	@Override
 	public Object plugin(Object o) {
-		return null;
+		return Plugin.wrap(o,this);
 	}
 
 	@Override
 	public void setProperties(Properties properties) {
-
+		logger.warn(properties.toString());
 	}
 }
