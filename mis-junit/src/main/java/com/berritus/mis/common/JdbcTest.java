@@ -10,13 +10,21 @@ import java.sql.*;
  */
 public class JdbcTest {
 	// 数据库驱动
-	public static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
+//	public static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
+//	// 数据库连接地址
+//	public static final String DB_URL = "jdbc:mysql://localhost:3306/spring?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+//	// 数据库用户名称
+//	public static final String DB_USER = "root";
+//	// 数据库用户密码
+//	public static final String DB_PASSWORD = "lovesnow";
+
+	public static final String DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
 	// 数据库连接地址
-	public static final String DB_URL = "jdbc:mysql://localhost:3306/spring?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+	public static final String DB_URL = "jdbc:oracle:thin:@172.16.2.91:1521:lzoa";
 	// 数据库用户名称
-	public static final String DB_USER = "root";
+	public static final String DB_USER = "oa_xxzx";
 	// 数据库用户密码
-	public static final String DB_PASSWORD = "lovesnow";
+	public static final String DB_PASSWORD = "xxzx123456";
 
 
 	public static Connection getConnection() {
@@ -115,7 +123,60 @@ public class JdbcTest {
 		}
 	}
 
-	public static void main(String[] args) {
-		execProcedure();
+	public static void executeSql(String sql) throws Exception {
+		// 获取数据库连接
+		Connection conn = getConnection();
+		// 使用Connection来创建一个Statement对象
+		Statement stmt = conn.createStatement();
+		String sql1 = "update deal_info set deal_comm= ? where flow_inid=?";
+		PreparedStatement pstm = conn.prepareStatement(sql1);
+		String deal_comm = "<SignComms><SignCommItem><SignTag>333</SignTag><SignComm></SignComm><SignOpinionId>";
+		pstm.setString(1, deal_comm);
+		pstm.setString(2, "19768");
+		// 执行SQL,返回boolean值表示是否包含ResultSet
+		pstm.executeUpdate();
+
+		String sql2 = "update deal_info set hq_deal_comm= ? where flow_inid=?";
+		pstm = conn.prepareStatement(sql2);
+		String deal_comm2 = "dddd";
+		pstm.setString(1, deal_comm2);
+		pstm.setString(2, "19768");
+		// 执行SQL,返回boolean值表示是否包含ResultSet
+		pstm.executeUpdate();
+
+		try {
+			pstm.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//boolean hasResultSet = stmt.execute(sql);
+		// 如果执行后有ResultSet结果集
+//		if (hasResultSet) {
+//			try (
+//					// 获取结果集
+//					ResultSet rs = stmt.getResultSet()) {
+//				// ResultSetMetaData是用于分析结果集的元数据接口
+//				ResultSetMetaData rsmd = rs.getMetaData();
+//				int columnCount = rsmd.getColumnCount();
+//				// 迭代输出ResultSet对象
+//				while (rs.next()) {
+//					// 依次输出每列的值
+//					for (int i = 0; i < columnCount; i++) {
+//						System.out.print(rs.getString(i + 1) + "\t");
+//					}
+//					System.out.print("\n");
+//				}
+//			}
+//		} else {
+//			System.out.println("该SQL语句影响的记录有"
+//					+ stmt.getUpdateCount() + "条");
+//		}
+	}
+
+	public static void main(String[] args) throws Exception{
+		//execProcedure();
+		String sql = "update deal_info set deal_comm= ? where flow_inid='19768'";
+		executeSql(sql);
 	}
 }
