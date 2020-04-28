@@ -89,9 +89,9 @@ public class DemoServiceImpl implements DemoService {
         //meetingRoomApplyDao.insert(meetingRoomApplyDTO);
         dynamicDemoService.dynamicTest(meetingRoomApplyDTO);
         //int i = 10 /0;
-        if (!sysCode.equals("MIS_TEST_DB2")) {
+        //if (!sysCode.equals("MIS_TEST_DB")) {
             //demoSecondService.dynamicTest(meetingRoomApplyDTO, "MIS_TEST_DB2");
-        }
+        //}
 
         if (sysCode.equals("MIS_TEST_DB2")) {
             //int i = 10 /0;

@@ -12,6 +12,7 @@ import com.berritus.mis.core.task.annotation.EnableMisTask;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -25,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan({"com.berritus.mis.controller", "com.berritus.mis.dao",
         "com.berritus.mis.service", "com.berritus.mis.query", "com.berritus.mis.dubbo",
         "com.berritus.mis.task", "com.berritus.test"})
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 //@EnableTransactionManagement
 @ServletComponentScan({"com.berritus.mis.controller.conf"})
 @EnableDubboConfiguration
