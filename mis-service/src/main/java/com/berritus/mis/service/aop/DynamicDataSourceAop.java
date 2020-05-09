@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.berritus.mis.core.bean.dynamicdb.DataSourceInfo;
 import com.berritus.mis.core.cache.redis.IRedisService;
 import com.berritus.mis.core.common.constant.SystemConstant;
-import com.berritus.mis.core.dynamicdb.xa.DataSourceXaService;
+import com.berritus.mis.core.dynamicdb.DataSourceService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -32,7 +32,7 @@ public class DynamicDataSourceAop {
 	public static Logger logger = LoggerFactory.getLogger(DynamicDataSourceAop.class);
 
 	@Autowired
-	private DataSourceXaService dataSourceService;
+	private DataSourceService dataSourceService;
 	@Autowired
 	private IRedisService redisService;
 

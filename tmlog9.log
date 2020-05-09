@@ -1,4 +1,0 @@
-{"id":"172.16.2.230.tm158804472014600001","wasCommitted":true,"participants":[{"uri":"172.16.2.230.tm1","state":"COMMITTING","expires":1588044730138,"resourceName":"mis_test_db"}]}
-{"id":"172.16.2.230.tm158804472014600001","wasCommitted":true,"participants":[{"uri":"172.16.2.230.tm1","state":"TERMINATED","expires":1588044730303,"resourceName":"mis_test_db"}]}
-{"id":"172.16.2.230.tm158804472099000002","wasCommitted":true,"participants":[{"uri":"172.16.2.230.tm2","state":"COMMITTING","expires":1588044730947,"resourceName":"mis_test_db2"}]}
-{"id":"172.16.2.230.tm158804472099000002","wasCommitted":true,"participants":[{"uri":"172.16.2.230.tm2","state":"TERMINATED","expires":1588044730949,"resourceName":"mis_test_db2"}]}

@@ -4,8 +4,8 @@ import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import com.berritus.mis.core.cache.annotation.EnableMisCache;
 import com.berritus.mis.core.component.annotation.EnableCoreComponent;
 import com.berritus.mis.core.controller.annotation.EnableMisController;
-import com.berritus.mis.core.dynamicdb.xa.DynamicDataSourceRegister;
-import com.berritus.mis.core.dynamicdb.xa.annotation.EnableCoreDynamicdbXa;
+import com.berritus.mis.core.dynamicdb.DynamicDataSourceRegister;
+import com.berritus.mis.core.dynamicdb.annotation.EnableCoreDynamicdb;
 import com.berritus.mis.core.rabbitmq.annotation.EnableMisRegisterRabbitMQ;
 import com.berritus.mis.core.rabbitmq.annotation.EnableMisUseRabbitMQ;
 import com.berritus.mis.core.task.annotation.EnableMisTask;
@@ -17,7 +17,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+//import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -26,8 +26,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan({"com.berritus.mis.controller", "com.berritus.mis.dao",
         "com.berritus.mis.service", "com.berritus.mis.query", "com.berritus.mis.dubbo",
         "com.berritus.mis.task", "com.berritus.test"})
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-//@EnableTransactionManagement
+//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication
+@EnableTransactionManagement
 @ServletComponentScan({"com.berritus.mis.controller.conf"})
 @EnableDubboConfiguration
 @EnableAspectJAutoProxy
@@ -38,7 +39,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableMisRegisterRabbitMQ
 @EnableMisUseRabbitMQ
 @EnableCoreComponent
-@EnableCoreDynamicdbXa
+@EnableCoreDynamicdb
 @Import({DynamicDataSourceRegister.class})
 public class MisApplication {
     public static void main(String[] args){

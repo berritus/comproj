@@ -30,9 +30,15 @@
             <groupId>com.berritus.core</groupId>
             <artifactId>mis-core-dao</artifactId>
         </dependency>
+        <!---->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dm</groupId>
+            <artifactId>DmJdbcDriver18</artifactId>
         </dependency>
     </dependencies>
 

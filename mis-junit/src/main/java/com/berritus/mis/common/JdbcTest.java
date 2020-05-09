@@ -18,14 +18,21 @@ public class JdbcTest {
 //	// 数据库用户密码
 //	public static final String DB_PASSWORD = "lovesnow";
 
-	public static final String DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
-	// 数据库连接地址
-	public static final String DB_URL = "jdbc:oracle:thin:@172.16.2.91:1521:lzoa";
-	// 数据库用户名称
-	public static final String DB_USER = "oa_xxzx";
-	// 数据库用户密码
-	public static final String DB_PASSWORD = "xxzx123456";
+//	public static final String DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
+//	// 数据库连接地址
+//	public static final String DB_URL = "jdbc:oracle:thin:@172.16.2.91:1521:lzoa";
+//	// 数据库用户名称
+//	public static final String DB_USER = "oa_xxzx";
+//	// 数据库用户密码
+//	public static final String DB_PASSWORD = "xxzx123456";
 
+	public static final String DRIVER_CLASS = "dm.jdbc.driver.DmDriver";
+	// 数据库连接地址
+	public static final String DB_URL = "jdbc:dm://localhost:5236/DMSERVER";
+	// 数据库用户名称
+	public static final String DB_USER = "SYSDBA";
+	// 数据库用户密码
+	public static final String DB_PASSWORD = "lovesnow@";
 
 	public static Connection getConnection() {
 		Connection conn = null;
@@ -128,21 +135,21 @@ public class JdbcTest {
 		Connection conn = getConnection();
 		// 使用Connection来创建一个Statement对象
 		Statement stmt = conn.createStatement();
-		String sql1 = "update deal_info set deal_comm= ? where flow_inid=?";
+		String sql1 = "update tb_student set stu_name= ? where id=?";
 		PreparedStatement pstm = conn.prepareStatement(sql1);
-		String deal_comm = "<SignComms><SignCommItem><SignTag>333</SignTag><SignComm></SignComm><SignOpinionId>";
+		String deal_comm = "hello dm";
 		pstm.setString(1, deal_comm);
-		pstm.setString(2, "19768");
+		pstm.setString(2, "4");
 		// 执行SQL,返回boolean值表示是否包含ResultSet
 		pstm.executeUpdate();
 
-		String sql2 = "update deal_info set hq_deal_comm= ? where flow_inid=?";
-		pstm = conn.prepareStatement(sql2);
-		String deal_comm2 = "dddd";
-		pstm.setString(1, deal_comm2);
-		pstm.setString(2, "19768");
-		// 执行SQL,返回boolean值表示是否包含ResultSet
-		pstm.executeUpdate();
+//		String sql2 = "update deal_info set hq_deal_comm= ? where flow_inid=?";
+//		pstm = conn.prepareStatement(sql2);
+//		String deal_comm2 = "dddd";
+//		pstm.setString(1, deal_comm2);
+//		pstm.setString(2, "19768");
+//		// 执行SQL,返回boolean值表示是否包含ResultSet
+//		pstm.executeUpdate();
 
 		try {
 			pstm.close();

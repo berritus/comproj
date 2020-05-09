@@ -62,10 +62,11 @@ public class DubboTranDemoServiceImpl implements DubboDemoService {
     @Override
     public TbStudent addStudent() {
         TbStudent student = new TbStudent();
+        //student.setId(10002);
         student.setAge(28);
         student.setStuName("aaaaaa");
 
-        splitTableService.checkStudentIsNeedSplit();
+        //splitTableService.checkStudentIsNeedSplit();
         studentMapper.insert(student);
         //throw new RuntimeException("错误啦");
 //        student.setId(5070);
